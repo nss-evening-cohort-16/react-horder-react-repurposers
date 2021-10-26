@@ -8,7 +8,7 @@ export default function Routes() {
   return (
     <div>
       <Switch>
-        <Route exact path="/home" component={Home} />
+        <Route exact path={['/', '/home']} component={Home} />
         <Route exact path="/stuff" component={MyStuff} />
         <Route exact path="/new" component={NewStuff} />
       </Switch>
