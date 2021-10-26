@@ -8,8 +8,10 @@ export default function Authenticated({ user }) {
 
 // NOTE: The propTypes are set agains the component and the term is camelCased
 Authenticated.propTypes = {
-  user: PropTypes.objectOf({
+  user: PropTypes.shape({
     fullName: PropTypes.string,
-    photo: PropTypes.string,
+    profileImage: PropTypes.string,
+    uid: PropTypes.string,
+    user: PropTypes.string,
   }).isRequired,
 };
