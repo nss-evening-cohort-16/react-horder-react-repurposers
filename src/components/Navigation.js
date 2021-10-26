@@ -69,5 +69,5 @@ Navigation.propTypes = {
 };
 
 Navigation.defaultProps = {
-  user: {},
+  user: null,
 };
