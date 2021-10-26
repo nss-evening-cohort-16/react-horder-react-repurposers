@@ -28,7 +28,7 @@ export default function Navigation({ user }) {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={() => history.push('/')}
+              onClick={() => history.push('/home')}
             >
               Home
             </button>
@@ -37,7 +37,7 @@ export default function Navigation({ user }) {
               className="btn btn-primary"
               onClick={() => history.push('/stuff')}
             >
-              Team
+              My Stuff
             </button>
             <button
               type="button"
