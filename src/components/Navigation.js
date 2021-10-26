@@ -63,9 +63,12 @@ export default function Navigation({ user }) {
 }
 
 Navigation.propTypes = {
-  user: PropTypes.shape({
-    uid: PropTypes.string,
-  }),
+  user: PropTypes.oneOfType([
+    PropTypes.shape({
+      uid: PropTypes.string,
+    }),
+    PropTypes.bool,
+  ]),
 };
 
 Navigation.defaultProps = {
