@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Routes from '../routes';
 
 export default function Authenticated({ user }) {
-  return (
-    <div className="text-center mt-5">
-      <h1>Hoard it all, {user.fullName}!</h1>
-    </div>
-  );
+  return <Routes user={user} />;
 }
 
 // NOTE: The propTypes are set agains the component and the term is camelCased
