@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { createStuff } from '../api/data/stuffData';
 
 const initialState = {
   itemName: '',
@@ -10,8 +9,8 @@ const initialState = {
   itemDescription: '',
 };
 
-export default function NewStuffForm({ stuffObj, user }) {
-  const [formInput, setFormInput] = useState({ uid: user.uid });
+export default function Form({ stuffObj }) {
+  const [formInput, setFormInput] = useState({ initialState });
   const history = useHistory();
 
   useEffect(() => {
@@ -21,7 +20,6 @@ export default function NewStuffForm({ stuffObj, user }) {
         itemImage: stuffObj.itemImage,
         firebaseKey: stuffObj.firebaseKey,
         itemDescription: stuffObj.itemDescription,
-        uid: user.uid,
       });
     }
   }, [stuffObj]);
@@ -34,25 +32,17 @@ export default function NewStuffForm({ stuffObj, user }) {
     }));
   };
 
-  const resetForm = () => {
-    setFormInput(initialState);
-    // setEditItem({});
-  };
+  //   const resetForm = () => {
+  //     setFormInput(initialState);
+  //     setEditStuff({});
+  //   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (stuffObj.firebaseKey) {
-      console.warn('edit stuff');
-      // promise here => setStuff(stuff)
-      resetForm();
-      history.push('/');
+      history.push('/stuff');
     } else {
-      createStuff({ ...formInput }).then((stuff) => {
-        // setStuff(stuff)
-        console.warn(stuff);
-        resetForm();
-        history.push('/');
-      });
+      history.push('/stuff');
     }
   };
 
@@ -67,7 +57,7 @@ export default function NewStuffForm({ stuffObj, user }) {
             id="itemName"
             value={formInput.itemName}
             onChange={handleChange}
-            placeholder="Item Name"
+            placeholder="Add Item Name"
             required
           />
           <input
@@ -99,7 +89,7 @@ export default function NewStuffForm({ stuffObj, user }) {
   );
 }
 
-NewStuffForm.propTypes = {
+Form.propTypes = {
   stuffObj: PropTypes.shape({
     itemName: PropTypes.string,
     firebaseKey: PropTypes.string,
@@ -107,9 +97,6 @@ NewStuffForm.propTypes = {
     itemDescription: PropTypes.string,
     uid: PropTypes.string,
   }),
-  user: PropTypes.shape({
-    uid: PropTypes.string,
-  }),
 };
 
-NewStuffForm.defaultProps = { stuffObj: {}, user: null };
+Form.defaultProps = { stuffObj: {} };
