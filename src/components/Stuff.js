@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { deleteStuff } from '../api/data/stuffData';
 
 export default function Stuff({ stuff }) {
   return (
@@ -8,8 +9,13 @@ export default function Stuff({ stuff }) {
       <div className="card" style={{ width: '18rem', margin: '3px' }}>
         <div className="card-body">
           <h5 className="card-title">{stuff.itemName}</h5>
-          <p className="card-text">{stuff.itemDescription}</p>
           <Link to={`/stuff/${stuff.firebaseKey}`}>Single</Link>
+          <br />
+          <Link to={`/edit/${stuff.firebaseKey}`}>Edit</Link>
+          <br />
+          <button type="button" onClick={() => deleteStuff(stuff.firebaseKey)}>
+            Delete
+          </button>
         </div>
       </div>
     </div>
