@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { signOutUser } from '../api/auth';
@@ -18,34 +18,14 @@ const NavContainer = styled.div`
 `;
 
 export default function Navigation({ user }) {
-  const history = useHistory();
-
   return (
     <NavBar>
       {user ? (
         <>
           <NavContainer>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() => history.push('/home')}
-            >
-              Home
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() => history.push('/stuff')}
-            >
-              My Stuff
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() => history.push('/new')}
-            >
-              New
-            </button>
+            <Link to="home">Home</Link>
+            <Link to="/stuff">My Stuff</Link>
+            <Link to="/new">New</Link>
           </NavContainer>
           <button
             type="button"
