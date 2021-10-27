@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import SignIn from '../views/SignIn';
-import Authenticated from '../views/Authenticated';
 import Navigation from '../components/Navigation';
+import Routes from '../routes';
 
 function Initialize() {
   const [user, setUser] = useState(null);
@@ -27,7 +27,7 @@ function Initialize() {
   return (
     <div className="App">
       <Navigation user={user} />
-      {user ? <Authenticated user={user} /> : <SignIn user={user} />}
+      {user ? <Routes user={user} /> : <SignIn user={user} />}
     </div>
   );
 }
