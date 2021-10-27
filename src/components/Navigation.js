@@ -23,7 +23,7 @@ export default function Navigation({ user }) {
       {user ? (
         <>
           <NavContainer>
-            <Link to="home">Home</Link>
+            <Link to="/home">Home</Link>
             <Link to="/stuff">My Stuff</Link>
             <Link to="/new">New</Link>
           </NavContainer>
