@@ -10,9 +10,9 @@ const getAllStuff = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const createStuff = () => new Promise((resolve, reject) => {
+const createStuff = (obj) => new Promise((resolve, reject) => {
   axios
-    .post(`${databaseURL}/stuff.json`)
+    .post(`${databaseURL}/stuff.json`, obj)
     .then((response) => {
       const firebaseKey = response.data.name;
       axios
