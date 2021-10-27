@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { signOutUser } from '../api/auth';
@@ -32,13 +32,9 @@ export default function Navigation({ user }) {
             >
               Home
             </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() => history.push('/stuff')}
-            >
+            <Link className="nav-link active" to="/stuff">
               My Stuff
-            </button>
+            </Link>
             <button
               type="button"
               className="btn btn-primary"

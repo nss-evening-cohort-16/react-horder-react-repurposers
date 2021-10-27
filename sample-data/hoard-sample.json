@@ -3,7 +3,8 @@
     "itemName": "Where's Waldo Book",
     "itemImage": "https://images-na.ssl-images-amazon.com/images/I/615IpbOcbvL._SX258_BO1,204,203,200_.jpg",
     "itemDescription": "Hey Wally watchers! Join the hunt for Wally in this wonderful adventure! Take the Wally challenge and go up and down the Corridors of Time, wander the Fantastic Flower Garden, witness the Mighty Fruit Fight, visit Clown Town and see many other wondrous Wonderlands! Wally and friends are hiding in every detailed scene. Full of eye-boggling extras and hours of fun, this fifth classic Wally adventure comes with a striking new cover. Wow! Amazing!",
-    "uid": "56789"
+    "uid": "56789",
+    "firebaseKey": "56789"
   },
   "item2": {
     "itemName": "Eleclover On-Off Table Lamp",
