@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Home from '../views/Home';
 import MyStuff from '../views/MyStuff';
 import NewStuff from '../views/NewStuff';
+import SingleStuff from '../views/SingleStuff';
 
 export default function Routes({
   stuffObj, setStuff, setEditStuff, user,
@@ -13,6 +14,7 @@ export default function Routes({
       <Switch>
         <Route exact path={['/', '/home']} component={Home} />
         <Route exact path="/stuff" component={MyStuff} />
+        <Route exact path="/stuff/:key" component={SingleStuff} />
         <Route
           exact
           path="/new/:"
