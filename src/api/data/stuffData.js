@@ -22,4 +22,20 @@ const createStuff = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { getAllStuff, createStuff };
+const deleteStuff = (firebaseKey) => new Promise((resolve, reject) => {
+  axios
+    .delete(`${databaseURL}/stuff/${firebaseKey}.json`)
+    .then(() => getAllStuff().then(resolve))
+    .catch(reject);
+});
+
+const updateStuff = (formObj) => new Promise((resolve, reject) => {
+  axios
+    .patch(`${databaseURL}/stuff/${formObj.firebaseKey}.json`, formObj)
+    .then(() => getAllStuff().then(resolve))
+    .catch(reject);
+});
+
+export {
+  getAllStuff, createStuff, deleteStuff, updateStuff,
+};
