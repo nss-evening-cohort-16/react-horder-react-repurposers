@@ -15,7 +15,7 @@ export default function Routes({
         <Route exact path="/stuff" component={MyStuff} />
         <Route
           exact
-          path="/new"
+          path="/new/:"
           component={() => (
             <NewStuff
               stuffObj={stuffObj}
