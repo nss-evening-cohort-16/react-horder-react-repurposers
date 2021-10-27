@@ -10,9 +10,9 @@ const getAllStuff = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const createStuff = () => new Promise((resolve, reject) => {
+const createStuff = (obj) => new Promise((resolve, reject) => {
   axios
-    .post(`${databaseURL}/stuff.json`)
+    .post(`${databaseURL}/stuff.json`, obj)
     .then((response) => {
       const firebaseKey = response.data.name;
       axios
@@ -22,4 +22,20 @@ const createStuff = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { getAllStuff, createStuff };
+const deleteStuff = (firebaseKey) => new Promise((resolve, reject) => {
+  axios
+    .delete(`${databaseURL}/stuff/${firebaseKey}.json`)
+    .then(() => getAllStuff().then(resolve))
+    .catch(reject);
+});
+
+const updateStuff = (formObj) => new Promise((resolve, reject) => {
+  axios
+    .patch(`${databaseURL}/stuff/${formObj.firebaseKey}.json`, formObj)
+    .then(() => getAllStuff().then(resolve))
+    .catch(reject);
+});
+
+export {
+  getAllStuff, createStuff, deleteStuff, updateStuff,
+};
