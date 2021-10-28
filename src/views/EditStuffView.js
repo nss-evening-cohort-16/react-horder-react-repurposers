@@ -16,7 +16,7 @@ export default function EditStuffView() {
     return () => {
       isMounted = false;
     };
-  }, [editStuff]);
+  }, []);
 
   return (
     <div>

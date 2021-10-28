@@ -27,13 +27,10 @@ export default function Form({ stuffObj }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormInput((prevState) => {
-      console.warn(prevState);
-      return {
-        ...prevState,
-        [name]: value,
-      };
-    });
+    setFormInput((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const resetForm = () => {
