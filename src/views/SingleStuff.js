@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getSingleStuff } from '../api/data/stuffData';
+import { Link, useParams, useHistory } from 'react-router-dom';
+import { deleteStuff, getSingleStuff } from '../api/data/stuffData';
 
 export default function SingleStuff() {
   const [singleStuff, setSingleStuff] = useState({});
   const { key } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     getSingleStuff(key).then(setSingleStuff);
@@ -12,18 +13,30 @@ export default function SingleStuff() {
 
   return (
     <>
-      <img src={singleStuff.itemImage} alt="ItemImage" />
-      <br />
-      <div>
+      <h3>
         Name:
         <br />
         {singleStuff.itemName}
-        <br />
-        <br />
-        Description:
+      </h3>
+      <br />
+      <img src={singleStuff.itemImage} alt="ItemImage" />
+      <br />
+      <div>
+        <h3>Description:</h3>
         <br />
         {singleStuff.itemDescription}
       </div>
+      <br />
+      <Link to={`/edit/${singleStuff.firebaseKey}`}>Edit</Link>
+      <br />
+      <button
+        type="button"
+        onClick={() => {
+          deleteStuff(singleStuff.firebaseKey).then(() => history.push('/stuff'));
+        }}
+      >
+        Delete
+      </button>
     </>
   );
 }
