@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 import { deleteStuff, getSingleStuff } from '../api/data/stuffData';
+
+const DetailsView = styled.div``;
 
 export default function SingleStuff() {
   const [singleStuff, setSingleStuff] = useState({});
@@ -12,7 +15,7 @@ export default function SingleStuff() {
   }, []);
 
   return (
-    <>
+    <DetailsView>
       <h3>
         Name:
         <br />
@@ -37,6 +40,6 @@ export default function SingleStuff() {
       >
         Delete
       </button>
-    </>
+    </DetailsView>
   );
 }
