@@ -1,6 +1,5 @@
 import React from 'react';
-import { Form } from 'reactstrap';
-// import PropTypes from 'prop-types';
+import Form from '../components/Form';
 
 export default function NewStuff() {
   return (
@@ -9,14 +8,3 @@ export default function NewStuff() {
     </div>
   );
 }
-
-// NewStuff.propTypes = {
-//   stuffObj: PropTypes.shape({
-//     itemName: PropTypes.string,
-//     firebaseKey: PropTypes.string,
-//     itemImage: PropTypes.string,
-//     itemDescription: PropTypes.string,
-//   }),
-// };
-
-// NewStuff.defaultProps = { stuffObj: {} };

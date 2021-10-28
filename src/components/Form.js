@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import { createStuff, updateStuff } from '../api/data/stuffData';
 
 const initialState = {
   itemName: '',
@@ -10,7 +11,7 @@ const initialState = {
 };
 
 export default function Form({ stuffObj }) {
-  const [formInput, setFormInput] = useState({ initialState });
+  const [formInput, setFormInput] = useState(initialState);
   const history = useHistory();
 
   useEffect(() => {
@@ -26,23 +27,32 @@ export default function Form({ stuffObj }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormInput((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    setFormInput((prevState) => {
+      console.warn(prevState);
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
   };
 
-  //   const resetForm = () => {
-  //     setFormInput(initialState);
-  //     setEditStuff({});
-  //   };
+  const resetForm = () => {
+    setFormInput(initialState);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (stuffObj.firebaseKey) {
-      history.push('/stuff');
+      updateStuff(formInput).then(() => {
+        console.warn(stuffObj);
+        resetForm();
+        history.push('/stuff');
+      });
     } else {
-      history.push('/stuff');
+      createStuff(formInput).then(() => {
+        resetForm();
+        history.push('/stuff');
+      });
     }
   };
 

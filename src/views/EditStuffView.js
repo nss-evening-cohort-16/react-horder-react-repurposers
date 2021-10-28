@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Form } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
+import Form from '../components/Form';
 import { getSingleStuff } from '../api/data/stuffData';
 
 export default function EditStuffView() {
   const [editStuff, setEditStuff] = useState({});
-  const { key } = useParams();
+  const { firebaseKey } = useParams();
 
   useEffect(() => {
-    getSingleStuff(key).then(setEditStuff);
-  });
+    let isMounted = true;
+    getSingleStuff(firebaseKey).then((stuff) => {
+      if (isMounted) setEditStuff(stuff);
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, [editStuff]);
+
   return (
     <div>
       <Form stuffObj={editStuff} />
