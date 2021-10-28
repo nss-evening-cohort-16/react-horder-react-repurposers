@@ -41,7 +41,6 @@ export default function Form({ stuffObj }) {
     e.preventDefault();
     if (stuffObj.firebaseKey) {
       updateStuff(formInput).then(() => {
-        console.warn(stuffObj);
         resetForm();
         history.push('/stuff');
       });
