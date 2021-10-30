@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import img from '../images/pageBackgroundImage.png';
 
 export const BackgroundImage = styled.div`
-  border: 1px solid #000;
   background-image: url(${img});
   position: absolute;
   height: 100%;
   width: 100%;
+  background-repeat: repeat;
 `;
 
 const Header = styled.h1`
