@@ -17,6 +17,10 @@ const NavContainer = styled.div`
   column-gap: 10px;
 `;
 
+const NavLoggedOut = styled.div`
+  font-weight: bold;
+`;
+
 export default function Navigation({ user }) {
   return (
     <NavBar>
@@ -36,7 +40,7 @@ export default function Navigation({ user }) {
           </button>
         </>
       ) : (
-        <div>React Hoarder</div>
+        <NavLoggedOut>React Repurposers</NavLoggedOut>
       )}
     </NavBar>
   );
