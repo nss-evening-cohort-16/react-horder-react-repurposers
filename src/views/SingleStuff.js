@@ -52,7 +52,7 @@ const Photo = styled.img`
 const Caption = styled.div`
   color: #444340;
   font-family: 'Nothing You Could Do', cursive;
-  font-size: 4vw;
+  font-size: 140%;
   font-weight: bold;
 `;
 
