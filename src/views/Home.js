@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ItemCounter from '../components/ItemCounter';
 import img from '../images/pageBackgroundImage.png';
 
 export const BackgroundImage = styled.div`
@@ -8,25 +9,24 @@ export const BackgroundImage = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
-`;
 
-const Header = styled.h1`
-  text-align: center;
-`;
-
-const MidText = styled.p`
-  text-align: center;
-  font-weight: bold;
-  margin-top: 40px;
+  h1 {
+    color: #444430;
+    text-align: center;
+    font-size: 84px;
+    font-weight: 400;
+    font-family: 'Heebo', sans-serif;
+    text-shadow: 2px 2px #a9a29e;
+  }
 `;
 
 export function Home() {
   return (
     <BackgroundImage>
       <div>
-        <Header>React Repurposers</Header>
+        <h1>React Repurposers</h1>
         <div>
-          <MidText>Repurposing the items that you do not want.</MidText>
+          <ItemCounter />
         </div>
       </div>
     </BackgroundImage>
