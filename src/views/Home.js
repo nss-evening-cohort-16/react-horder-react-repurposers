@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import img from '../images/pageBackgroundImage.png';
 
-const Content = styled.div`
+export const BackgroundImage = styled.div`
   border: 1px solid #000;
   background-image: url(${img});
   position: absolute;
@@ -20,15 +20,15 @@ const MidText = styled.p`
   margin-top: 40px;
 `;
 
-export default function Home() {
+export function Home() {
   return (
-    <Content>
+    <BackgroundImage>
       <div>
         <Header>React Repurposers</Header>
         <div>
           <MidText>Repurposing the items that you do not want.</MidText>
         </div>
       </div>
-    </Content>
+    </BackgroundImage>
   );
 }

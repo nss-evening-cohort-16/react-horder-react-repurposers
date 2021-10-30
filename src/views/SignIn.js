@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { signInUser } from '../api/auth';
 import img from '../images/homeBackgroundImage.png';
 
-const Content = styled.div`
+const LoggedOutBackgroundImage = styled.div`
   border: 1px solid #000;
   background-image: url(${img});
   position: absolute;
@@ -15,7 +15,7 @@ const Content = styled.div`
 export default function SignIn({ user }) {
   return (
     <>
-      <Content>
+      <LoggedOutBackgroundImage>
         {user === null ? (
           <div className="text-center">
             <Spinner
@@ -35,7 +35,7 @@ export default function SignIn({ user }) {
             </button>
           </div>
         )}
-      </Content>
+      </LoggedOutBackgroundImage>
     </>
   );
 }
