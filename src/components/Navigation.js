@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { signOutUser } from '../api/auth';
+import img from '../images/navbar-background.png';
 
 const NavBar = styled.div`
   display: flex;
   justify-content: space-between;
-
+  background-image: url(${img});
   padding: 10px;
   border-bottom: 1px solid black;
 `;
