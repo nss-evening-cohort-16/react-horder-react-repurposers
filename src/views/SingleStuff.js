@@ -28,7 +28,6 @@ const PolaroidSide = styled.div`
   width: 3.5in;
   height: 4.2in;
   padding: 20px;
-  border: 1px solid black;
   box-shadow: 10px 10px 10px 0px;
   margin: 10px;
 
@@ -38,7 +37,6 @@ const PolaroidSide = styled.div`
 
 const PhotoShadow = styled.div`
   box-shadow: inset 0px 0px 10px 8px rgba(0, 0, 0, 0.3);
-  border: 1px solid black;
 `;
 
 const Photo = styled.img`
