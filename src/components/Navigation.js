@@ -10,16 +10,36 @@ const NavBar = styled.div`
   justify-content: space-between;
   background-image: url(${img});
   padding: 10px;
-  border-bottom: 1px solid black;
 `;
 
 const NavContainer = styled.div`
   display: flex;
   column-gap: 10px;
+  margin-left: 20px;
+
+  .linkStyling {
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #444430;
+    font-family: 'Heebo', sans-serif;
+    font-size: 25px;
+    text-decoration: none;
+  }
+  a:active {
+    color: #a56a26;
+  }
+  .btn-styling {
+    font-family: 'Heebo', sans-serif;
+    background-color: #e0ccaa;
+    outline-color: #a56a26;
+  }
 `;
 
 const NavLoggedOut = styled.div`
   font-weight: bold;
+  font-family: 'Heebo', sans-serif;
+  color: #444430;
+  font-size: 25px;
 `;
 
 export default function Navigation({ user }) {
@@ -28,16 +48,22 @@ export default function Navigation({ user }) {
       {user ? (
         <>
           <NavContainer>
-            <Link to="/home">Home</Link>
-            <Link to="/stuff">My Stuff</Link>
-            <Link to="/new">New</Link>
+            <Link className="linkStyling" to="/home">
+              HOME
+            </Link>
+            <Link className="linkStyling" to="/stuff">
+              MY STUFF
+            </Link>
+            <Link className="linkStyling" to="/new">
+              NEW
+            </Link>
           </NavContainer>
           <button
             type="button"
-            className="btn btn-danger"
+            className="btn btn-outline-dark bt-syling"
             onClick={signOutUser}
           >
-            Sign Out
+            SIGN OUT
           </button>
         </>
       ) : (
