@@ -21,7 +21,6 @@ const PolaroidSide = styled.div`
 
   display: flex;
   flex-direction: column;
-  row-gap: 10px;
   align-items: center;
   text-align: center;
 
@@ -48,6 +47,9 @@ const Photo = styled.img`
 `;
 
 const Caption = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
   color: #444340;
   font-family: 'Nothing You Could Do', cursive;
   font-size: 140%;
@@ -57,6 +59,10 @@ const Caption = styled.div`
 `;
 
 const Description = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+
   font-family: 'Nothing You Could Do', cursive;
   color: #444340;
   font-size: 120%;
@@ -66,8 +72,6 @@ const Description = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-  height: 100%;
-  align-items: flex-end;
   display: flex;
   column-gap: 10px;
   justify-content: center;
