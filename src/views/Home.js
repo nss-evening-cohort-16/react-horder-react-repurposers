@@ -18,6 +18,14 @@ export const BackgroundImage = styled.div`
     font-family: 'Heebo', sans-serif;
     text-shadow: 2px 2px #a9a29e;
   }
+  h3 {
+    color: #444430;
+    text-align: center;
+    font-size: 56px;
+    font-weight: 300;
+    font-family: 'Heebo', sans-serif;
+    text-shadow: 2px 2px #a9a29e;
+  }
 `;
 
 export function Home() {

@@ -7,13 +7,12 @@ export default function ItemCounter() {
   useEffect(() => {
     let isMounted = true;
 
-    if (isMounted) {
-      getAllStuff().then([itemCount]);
-      console.warn(itemCount);
-    }
+    getAllStuff().then((item) => {
+      if (isMounted) setItemCount(item);
+    });
+
     return () => {
       isMounted = false;
-      setItemCount(itemCount.length);
     };
   }, []);
 
@@ -21,8 +20,8 @@ export default function ItemCounter() {
     <div>
       <div className="card" style={{ width: '18rem', margin: '3px' }}>
         <div className="card-body">
-          <h1 className="card-title">Total Items:</h1>
-          {itemCount.length}
+          <h3 className="card-title">Total Items:</h3>
+          <h5>{itemCount.length}</h5>
         </div>
       </div>
     </div>
