@@ -1,7 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 import { createStuff, updateStuff } from '../api/data/stuffData';
+
+const FormContainer = styled.div`
+  width: 60%;
+  margin: auto;
+  padding: 50px 0;
+  background-image: h1 {
+    color: #444430;
+    text-align: center;
+    font-size: 84px;
+    font-weight: 400;
+    font-family: 'Heebo', sans-serif;
+    text-shadow: 2px 2px #b02e0c;
+  }
+`;
 
 const initialState = {
   itemName: '',
@@ -53,8 +68,9 @@ export default function Form({ stuffObj }) {
   };
 
   return (
-    <div>
+    <FormContainer>
       <form onSubmit={handleSubmit}>
+        <h1>SAVE STUFF</h1>
         <div className="mb-3 d-flex">
           <input
             className="form-control form-control-lg me-1"
@@ -91,7 +107,7 @@ export default function Form({ stuffObj }) {
           </button>
         </div>
       </form>
-    </div>
+    </FormContainer>
   );
 }
 
