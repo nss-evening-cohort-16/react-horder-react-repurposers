@@ -3,7 +3,8 @@ import { Link, useParams, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import ReactCardFlip from 'react-card-flip';
 import { deleteStuff, getSingleStuff } from '../api/data/stuffData';
-import backgroundImage from '../images/pageBackgroundImage.png';
+import backgroundImage from '../images/homeBackgroundImage.png';
+import polaroidTexture from '../images/pageBackgroundImage.png';
 
 const Background = styled.div`
   display: flex;
@@ -15,8 +16,8 @@ const Background = styled.div`
   background-image: url(${backgroundImage});
 `;
 
-const PolaroidFrame = styled.div`
-  background-color: white;
+const PolaroidSide = styled.div`
+  background-image: url(${polaroidTexture});
 
   display: flex;
   flex-direction: column;
@@ -28,35 +29,37 @@ const PolaroidFrame = styled.div`
   height: 4.2in;
   padding: 20px;
   border: 1px solid black;
+  box-shadow: 10px 10px 10px 0px;
   margin: 10px;
+
+  position: relative;
+  z-index: 0;
 `;
 
-const FrameFront = styled.div``;
-
-const FrameBack = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+const PhotoShadow = styled.div`
+  box-shadow: inset 0px 0px 10px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid black;
 `;
 
 const Photo = styled.img`
   width: 3.1in;
   height: 3.1in;
-  border: 1px solid black;
+  object-fit: cover;
+  position: relative;
+  z-index: -1;
 `;
 
 const Caption = styled.div`
-  margin-top: 0.3em;
-  align-items: center;
-  font-family: 'Nothing You Could Do', cursive;
-  font-size: 150%;
-  font-weight: bold;
   color: #444340;
+  font-family: 'Nothing You Could Do', cursive;
+  font-size: 4vw;
+  font-weight: bold;
 `;
 
 const Description = styled.div`
   font-family: 'Nothing You Could Do', cursive;
   color: #444340;
+  font-size: 120%;
 `;
 
 const ButtonContainer = styled.div`
@@ -69,9 +72,8 @@ const ButtonContainer = styled.div`
 
 export default function SingleStuff() {
   const history = useHistory();
-  const [singleStuff, setSingleStuff] = useState({});
   const { key } = useParams();
-
+  const [singleStuff, setSingleStuff] = useState({});
   useEffect(() => {
     getSingleStuff(key).then(setSingleStuff);
   }, []);
@@ -84,34 +86,32 @@ export default function SingleStuff() {
   return (
     <Background>
       <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-        <PolaroidFrame onClick={handleClick}>
-          <FrameFront>
+        <PolaroidSide onClick={handleClick}>
+          <PhotoShadow>
             <Photo src={singleStuff.itemImage} alt="ItemImage" />
-            <Caption>{singleStuff.itemName}</Caption>
-          </FrameFront>
-        </PolaroidFrame>
-        <PolaroidFrame onClick={handleClick}>
-          <FrameBack>
-            <Description>{singleStuff.itemDescription}</Description>
-            <ButtonContainer>
-              <Link
-                to={`/edit/${singleStuff.firebaseKey}`}
-                className="btn btn-outline-secondary"
-              >
-                <i className="fas fa-paperclip" />
-              </Link>
-              <button
-                type="button"
-                className="btn btn-outline-secondary"
-                onClick={() => {
-                  deleteStuff(singleStuff.firebaseKey).then(() => history.push('/stuff'));
-                }}
-              >
-                <i className="fas fa-trash-alt" />
-              </button>
-            </ButtonContainer>
-          </FrameBack>
-        </PolaroidFrame>
+          </PhotoShadow>
+          <Caption>{singleStuff.itemName}</Caption>
+        </PolaroidSide>
+        <PolaroidSide onClick={handleClick}>
+          <Description>{singleStuff.itemDescription}</Description>
+          <ButtonContainer>
+            <Link
+              to={`/edit/${singleStuff.firebaseKey}`}
+              className="btn btn-outline-secondary"
+            >
+              <i className="fas fa-paperclip" />
+            </Link>
+            <button
+              type="button"
+              className="btn btn-outline-secondary"
+              onClick={() => {
+                deleteStuff(singleStuff.firebaseKey).then(() => history.push('/stuff'));
+              }}
+            >
+              <i className="fas fa-trash-alt" />
+            </button>
+          </ButtonContainer>
+        </PolaroidSide>
       </ReactCardFlip>
     </Background>
   );

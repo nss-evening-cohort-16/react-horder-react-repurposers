@@ -20,8 +20,8 @@ const Buttons = styled.div`
   column-gap: 5px;
   justify-content: center;
   font-family: 'Heebo', sans-serif;
-  background-color: #E0CCAA
-  outline-color: #A56A26;
+  background-color: #e0ccaa;
+  outline-color: #a56a26;
   align-items: flex-end;
   .btn-styling {
     align-self: flex-end;
