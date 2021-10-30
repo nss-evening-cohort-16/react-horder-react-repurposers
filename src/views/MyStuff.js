@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getAllStuff } from '../api/data/stuffData';
 import Stuff from '../components/Stuff';
-import { BackgroundImage } from './Home';
 
 const MyStuffView = styled.div`
   display: flex;
@@ -26,13 +25,13 @@ export default function MyStuff() {
     };
   });
   return (
-    <BackgroundImage>
+    <>
       <h1 className="myStuffTitle">MY STUFF</h1>
       <MyStuffView>
         {items.map((stuff) => (
           <Stuff key={stuff.firebaseKey} stuff={stuff} />
         ))}
       </MyStuffView>
-    </BackgroundImage>
+    </>
   );
 }

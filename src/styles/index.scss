@@ -14,3 +14,9 @@ body {
   font-family: 'Heebo', sans-serif;
   text-shadow: 2px 2px #A9A29E;
 }
+
+.card-styling {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
