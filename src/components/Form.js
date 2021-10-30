@@ -6,36 +6,36 @@ import { createStuff, updateStuff } from '../api/data/stuffData';
 import { BackgroundImage } from '../views/Home';
 
 const FormContainer = styled.div`
-  width: 60%;
+  width: 65%;
   margin: auto;
   padding: 50px 0;
-  
+
   h1 {
     color: #444430;
     text-align: center;
     font-size: 84px;
     font-weight: 400;
     font-family: 'Heebo', sans-serif;
-    text-shadow: 2px 2px #A9A29E;
+    text-shadow: 2px 2px #a9a29e;
   }
 
-  h5{
+  h5 {
     text-align: center;
     font-size: 35px;
-    color: #A56A26;
+    color: #a56a26;
     font-family: 'Nothing You Could Do', cursive;
   }
 
-  input{
-    font-size: 18px;
-    color: #A56A26;
+  input {
+    font-size: 16px;
+    color: #a56a26;
     font-family: 'Nothing You Could Do', cursive;
   }
 
-  button{
+  button {
     font-family: 'Heebo', sans-serif;
-    background-color: #E0CCAA
-    outline-color: #A56A26;
+    background-color: #e0ccaa;
+    outline-color: #a56a26;
   }
 `;
 
