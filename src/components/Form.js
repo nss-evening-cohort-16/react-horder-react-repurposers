@@ -27,7 +27,7 @@ const FormContainer = styled.div`
   }
 
   input {
-    font-size: 16px;
+    font-size: 18px;
     color: #a56a26;
     font-family: 'Nothing You Could Do', cursive;
   }
