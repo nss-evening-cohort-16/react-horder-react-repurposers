@@ -6,7 +6,7 @@ import { createStuff, updateStuff } from '../api/data/stuffData';
 import { BackgroundImage } from '../views/Home';
 
 const FormContainer = styled.div`
-  width: 60%;
+  width: 65%;
   margin: auto;
   padding: 50px 0;
 
