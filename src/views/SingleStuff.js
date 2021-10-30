@@ -2,8 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { deleteStuff, getSingleStuff } from '../api/data/stuffData';
+import backgroundImage from '../images/pageBackgroundImage.png';
 
-const DetailsView = styled.div`
+const Background = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: url(${backgroundImage});
+`;
+
+const PolaroidFrame = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 10px;
@@ -14,12 +22,17 @@ const DetailsView = styled.div`
   margin: 10px;
 `;
 
-const StuffImage = styled.img`
+const Photo = styled.img`
   max-width: 500px;
   max-height: 500px;
 `;
 
-const StuffDescription = styled.div`
+const Caption = styled.div`
+  font-family: 'Nothing You Could Do', cursive;
+  color: #444340;
+`;
+
+const Description = styled.div`
   max-width: 500px;
 `;
 
@@ -39,27 +52,29 @@ export default function SingleStuff() {
   }, []);
 
   return (
-    <DetailsView>
-      <StuffImage src={singleStuff.itemImage} alt="ItemImage" />
-      <h3>{singleStuff.itemName}</h3>
-      <StuffDescription>{singleStuff.itemDescription}</StuffDescription>
-      <ButtonContainer>
-        <Link
-          to={`/edit/${singleStuff.firebaseKey}`}
-          className="btn btn-primary"
-        >
-          Edit
-        </Link>
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={() => {
-            deleteStuff(singleStuff.firebaseKey).then(() => history.push('/stuff'));
-          }}
-        >
-          Delete
-        </button>
-      </ButtonContainer>
-    </DetailsView>
+    <Background>
+      <PolaroidFrame>
+        <Photo src={singleStuff.itemImage} alt="ItemImage" />
+        <Caption>{singleStuff.itemName}</Caption>
+        <Description>{singleStuff.itemDescription}</Description>
+        <ButtonContainer>
+          <Link
+            to={`/edit/${singleStuff.firebaseKey}`}
+            className="btn btn-primary"
+          >
+            Edit
+          </Link>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={() => {
+              deleteStuff(singleStuff.firebaseKey).then(() => history.push('/stuff'));
+            }}
+          >
+            Delete
+          </button>
+        </ButtonContainer>
+      </PolaroidFrame>
+    </Background>
   );
 }

@@ -27,7 +27,7 @@ function Initialize() {
   return (
     <div className="App">
       <Navigation user={user} />
-      {user ? <Routes user={user} /> : <SignIn user={user} />}
+      {user ? <Routes /> : <SignIn user={user} />}
     </div>
   );
 }
