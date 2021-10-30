@@ -52,6 +52,8 @@ const Caption = styled.div`
   font-family: 'Nothing You Could Do', cursive;
   font-size: 140%;
   font-weight: bold;
+
+  transform: rotate(-2deg);
 `;
 
 const Description = styled.div`
@@ -60,7 +62,7 @@ const Description = styled.div`
   font-size: 120%;
   font-weight: bold;
 
-  transform: rotate(-3deg);
+  transform: rotate(-4deg);
 `;
 
 const ButtonContainer = styled.div`
