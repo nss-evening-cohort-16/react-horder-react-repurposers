@@ -58,6 +58,9 @@ const Description = styled.div`
   font-family: 'Nothing You Could Do', cursive;
   color: #444340;
   font-size: 120%;
+  font-weight: bold;
+
+  transform: rotate(-3deg);
 `;
 
 const ButtonContainer = styled.div`
