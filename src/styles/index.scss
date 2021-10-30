@@ -6,4 +6,17 @@ body {
   background-color: #A56A26 !important;
 }
 
+.myStuffTitle {
+  text-align: center;
+  color: #444430;
+  font-size: 84px;
+  font-weight: 400;
+  font-family: 'Heebo', sans-serif;
+  text-shadow: 2px 2px #A9A29E;
+}
 
+.card-styling {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
