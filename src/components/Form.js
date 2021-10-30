@@ -1,7 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 import { createStuff, updateStuff } from '../api/data/stuffData';
+import { BackgroundImage } from '../views/Home';
+
+const FormContainer = styled.div`
+  width: 60%;
+  margin: auto;
+  padding: 50px 0;
+  
+  h1 {
+    color: #444430;
+    text-align: center;
+    font-size: 84px;
+    font-weight: 400;
+    font-family: 'Heebo', sans-serif;
+    text-shadow: 2px 2px #A9A29E;
+  }
+
+  h5{
+    text-align: center;
+    font-size: 35px;
+    color: #A56A26;
+    font-family: 'Nothing You Could Do', cursive;
+  }
+
+  input{
+    font-size: 18px;
+    color: #A56A26;
+    font-family: 'Nothing You Could Do', cursive;
+  }
+
+  button{
+    font-family: 'Heebo', sans-serif;
+    background-color: #E0CCAA
+    outline-color: #A56A26;
+  }
+`;
 
 const initialState = {
   itemName: '',
@@ -53,45 +89,49 @@ export default function Form({ stuffObj }) {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3 d-flex">
-          <input
-            className="form-control form-control-lg me-1"
-            type="text"
-            name="itemName"
-            id="itemName"
-            value={formInput.itemName}
-            onChange={handleChange}
-            placeholder="Add Item Name"
-            required
-          />
-          <input
-            className="form-control form-control-lg me-1"
-            type="url"
-            name="itemImage"
-            id="itemImage"
-            value={formInput.itemImage}
-            onChange={handleChange}
-            placeholder="ADD ITEM IMAGE URL"
-            required
-          />
-          <input
-            className="form-control form-control-lg me-1"
-            type="text"
-            name="itemDescription"
-            id="itemDescription"
-            value={formInput.itemDescription}
-            onChange={handleChange}
-            placeholder="ADD ITEM DESCRIPTION"
-            required
-          />
-          <button className="btn btn-success" type="submit">
-            {stuffObj.firebaseKey ? 'UPDATE' : 'SUBMIT'}
-          </button>
-        </div>
-      </form>
-    </div>
+    <BackgroundImage>
+      <FormContainer>
+        <form onSubmit={handleSubmit}>
+          <h1>SAVE STUFF</h1>
+          <h5>Add what you want to save below!</h5>
+          <div className="mb-3 d-flex">
+            <input
+              className="form-control form-control-lg me-1"
+              type="text"
+              name="itemName"
+              id="itemName"
+              value={formInput.itemName}
+              onChange={handleChange}
+              placeholder="NAME"
+              required
+            />
+            <input
+              className="form-control form-control-lg me-1"
+              type="url"
+              name="itemImage"
+              id="itemImage"
+              value={formInput.itemImage}
+              onChange={handleChange}
+              placeholder="IMAGE URL"
+              required
+            />
+            <input
+              className="form-control form-control-lg me-1"
+              type="text"
+              name="itemDescription"
+              id="itemDescription"
+              value={formInput.itemDescription}
+              onChange={handleChange}
+              placeholder="DESCRIPTION"
+              required
+            />
+            <button className="btn btn-outline-secondary" type="submit">
+              {stuffObj.firebaseKey ? 'UPDATE' : 'SUBMIT'}
+            </button>
+          </div>
+        </form>
+      </FormContainer>
+    </BackgroundImage>
   );
 }
 
