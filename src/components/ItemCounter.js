@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { getAllStuff } from '../api/data/stuffData';
+
+const CardContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+`;
 
 export default function ItemCounter() {
   const [itemCount, setItemCount] = useState([]);
@@ -17,13 +24,11 @@ export default function ItemCounter() {
   }, []);
 
   return (
-    <div>
-      <div className="card" style={{ width: '18rem', margin: '3px' }}>
-        <div className="card-body">
-          <h3 className="card-title">Total Items:</h3>
-          <h5>{itemCount.length}</h5>
-        </div>
+    <CardContainer>
+      <div className="card" style={{ width: '48rem', margin: 'auto' }}>
+        <h3 className="card-title">Total Items In Collection:</h3>
+        <h3>{itemCount.length}</h3>
       </div>
-    </div>
+    </CardContainer>
   );
 }
