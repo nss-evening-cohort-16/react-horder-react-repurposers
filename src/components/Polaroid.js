@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { deleteStuff, getSingleStuff } from '../api/data/stuffData';
+import PropTypes from 'prop-types';
+import { deleteStuff } from '../api/data/stuffData';
 import polaroidTexture from '../images/pageBackgroundImage.png';
 
 const PolaroidSide = styled.div`
@@ -66,13 +67,8 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
-export default function Polaroid() {
+export default function Polaroid({ stuff }) {
   const history = useHistory();
-  const { key } = useParams();
-  const [singleStuff, setSingleStuff] = useState({});
-  useEffect(() => {
-    getSingleStuff(key).then(setSingleStuff);
-  }, []);
 
   const [isFlipped, setIsFlipped] = useState(false);
   const handleClick = () => {
@@ -83,24 +79,30 @@ export default function Polaroid() {
     <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
       <PolaroidSide onClick={handleClick}>
         <PhotoShadow>
-          <Photo src={singleStuff.itemImage} alt="ItemImage" />
+          <Photo src={stuff.itemImage} alt="ItemImage" />
         </PhotoShadow>
-        <Caption>{singleStuff.itemName}</Caption>
+        <Caption>{stuff.itemName}</Caption>
       </PolaroidSide>
       <PolaroidSide onClick={handleClick}>
-        <Description>{singleStuff.itemDescription}</Description>
+        <Description>{stuff.itemDescription}</Description>
         <ButtonContainer>
           <Link
-            to={`/edit/${singleStuff.firebaseKey}`}
+            to={`/stuff/${stuff.firebaseKey}`}
             className="btn btn-outline-secondary"
           >
             <i className="fas fa-paperclip" />
+          </Link>
+          <Link
+            to={`/edit/${stuff.firebaseKey}`}
+            className="btn btn-outline-secondary"
+          >
+            <i className="fas fa-edit" />
           </Link>
           <button
             type="button"
             className="btn btn-outline-secondary"
             onClick={() => {
-              deleteStuff(singleStuff.firebaseKey).then(() => history.push('/stuff'));
+              deleteStuff(stuff.firebaseKey).then(() => history.push('/stuff'));
             }}
           >
             <i className="fas fa-trash-alt" />
@@ -110,3 +112,7 @@ export default function Polaroid() {
     </ReactCardFlip>
   );
 }
+
+Polaroid.propTypes = {
+  stuff: PropTypes.shape().isRequired,
+};
