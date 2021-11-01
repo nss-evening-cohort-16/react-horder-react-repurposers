@@ -8,7 +8,9 @@ const Photo = styled.img`
   max-width: 600px;
   max-height: 600px;
 
+  padding: 1px;
   border: 1px solid black;
+  border-radius: 2px;
   box-shadow: 5px 5px 10px 0px;
 `;
 
