@@ -13,6 +13,8 @@ const Background = styled.div`
   height: 100%;
   width: 100%;
   background-image: url(${backgroundImage});
+
+  padding-top: 40px;
 `;
 
 export default function SingleStuff() {
@@ -24,8 +26,6 @@ export default function SingleStuff() {
 
   return (
     <Background>
-      <br />
-      <br />
       <Details stuff={singleStuff} />
     </Background>
   );
