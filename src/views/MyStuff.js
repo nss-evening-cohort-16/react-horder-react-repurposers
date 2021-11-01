@@ -11,6 +11,7 @@ const MyStuffView = styled.div`
   text-align: center;
   padding: 10px;
   margin: 10px;
+  justify-content: center;
 `;
 
 export default function MyStuff() {

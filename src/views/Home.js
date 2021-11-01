@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ItemCounter from '../components/ItemCounter';
 import img from '../images/pageBackgroundImage.png';
 
 export const BackgroundImage = styled.div`
@@ -8,26 +9,42 @@ export const BackgroundImage = styled.div`
   height: 100%;
   width: 100%;
   background-repeat: repeat;
-`;
 
-const Header = styled.h1`
-  text-align: center;
-`;
+  h1 {
+    color: #444430;
+    text-align: center;
+    font-size: 84px;
+    font-weight: 400;
+    font-family: 'Heebo', sans-serif;
+    text-shadow: 2px 2px #a9a29e;
+  }
 
-const MidText = styled.p`
-  text-align: center;
-  font-weight: bold;
-  margin-top: 40px;
+  h3 {
+    color: #444430;
+    text-align: center;
+    font-size: 56px;
+    font-weight: 400;
+    font-family: 'Heebo', sans-serif;
+    text-shadow: 2px 2px #a9a29e;
+  }
+
+  .cardHouse {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .header {
+    padding: 50px;
+  }
 `;
 
 export function Home() {
   return (
     <BackgroundImage>
-      <div>
-        <Header>React Repurposers</Header>
-        <div>
-          <MidText>Repurposing the items that you do not want.</MidText>
-        </div>
+      <div className="cardHouse">
+        <h1 className="header">REACT REPURPOSERS</h1>
+        <ItemCounter />
       </div>
     </BackgroundImage>
   );

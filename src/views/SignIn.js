@@ -11,6 +11,21 @@ const LoggedOutBackgroundImage = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
+
+  h1 {
+    color: #444430;
+    text-align: center;
+    font-size: 84px;
+    font-weight: 400;
+    font-family: 'Heebo', sans-serif;
+    text-shadow: 2px 2px #a9a29e;
+  }
+
+  button {
+    font-family: 'Heebo', sans-serif;
+    background-color: #e0ccaa;
+    outline-color: #a56a26;
+  }
 `;
 export default function SignIn({ user }) {
   return (
@@ -28,7 +43,7 @@ export default function SignIn({ user }) {
             <h1>Welcome to React Repurposers!</h1>
             <button
               type="button"
-              className="btn btn-success"
+              className="btn btn-outline-secondary"
               onClick={signInUser}
             >
               Login
