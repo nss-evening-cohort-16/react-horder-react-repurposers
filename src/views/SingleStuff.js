@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { getSingleStuff } from '../api/data/stuffData';
-import Polaroid from '../components/Polaroid';
-import backgroundImage from '../images/homeBackgroundImage.png';
+import Details from '../components/Details';
+import backgroundImage from '../images/pageBackgroundImage.png';
 
 const Background = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   position: absolute;
   height: 100%;
@@ -24,7 +24,9 @@ export default function SingleStuff() {
 
   return (
     <Background>
-      <Polaroid stuff={singleStuff} />
+      <br />
+      <br />
+      <Details stuff={singleStuff} />
     </Background>
   );
 }
