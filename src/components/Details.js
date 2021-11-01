@@ -5,6 +5,9 @@ import styled from 'styled-components';
 const Photo = styled.img`
   max-width: 600px;
   max-height: 600px;
+
+  border: 1px solid black;
+  box-shadow: 5px 5px 10px 0px;
 `;
 
 const Title = styled.div`
