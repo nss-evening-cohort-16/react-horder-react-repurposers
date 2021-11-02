@@ -2,14 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { signOutUser } from '../api/auth';
 import img from '../images/navbar-background.png';
+import SignOutButton from './buttons/SignOutButton';
+import SignInButton from './buttons/SignInButton';
 
 const NavBar = styled.div`
   display: flex;
   justify-content: space-between;
   background-image: url(${img});
   padding: 10px;
+  border-bottom: 1px solid black;
 `;
 
 const NavContainer = styled.div`
@@ -28,18 +30,16 @@ const NavContainer = styled.div`
   a:active {
     color: #a56a26;
   }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
   .btn-styling {
     font-family: 'Heebo', sans-serif;
     background-color: #e0ccaa;
     outline-color: #a56a26;
   }
-`;
-
-const NavLoggedOut = styled.div`
-  font-weight: bold;
-  font-family: 'Heebo', sans-serif;
-  color: #444430;
-  font-size: 25px;
 `;
 
 export default function Navigation({ user }) {
@@ -58,16 +58,13 @@ export default function Navigation({ user }) {
               NEW
             </Link>
           </NavContainer>
-          <button
-            type="button"
-            className="btn btn-outline-dark bt-syling"
-            onClick={signOutUser}
-          >
-            SIGN OUT
-          </button>
+          <SignOutButton />
         </>
       ) : (
-        <NavLoggedOut>React Repurposers</NavLoggedOut>
+        <>
+          <div />
+          <SignInButton />
+        </>
       )}
     </NavBar>
   );

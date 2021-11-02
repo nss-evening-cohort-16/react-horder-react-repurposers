@@ -4,8 +4,23 @@ import { getAllStuff } from '../api/data/stuffData';
 
 const CardContainer = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 60px;
+`;
+
+const CounterLabel = styled.div`
+  color: #444430;
+  font-size: 250%;
+  font-weight: 400;
+  font-family: 'Heebo', sans-serif;
+`;
+
+const Counter = styled.div`
+  color: #444430;
+  font-family: 'Nothing You Could Do', cursive;
+  font-weight: bold;
+  font-size: 600%;
 `;
 
 export default function ItemCounter() {
@@ -25,10 +40,8 @@ export default function ItemCounter() {
 
   return (
     <CardContainer>
-      <div className="card" style={{ width: '48rem', margin: 'auto' }}>
-        <h3 className="card-title">Total Items In Collection:</h3>
-        <h3>{itemCount.length}</h3>
-      </div>
+      <CounterLabel>Total Items In Collection:</CounterLabel>
+      <Counter>{itemCount.length}</Counter>
     </CardContainer>
   );
 }

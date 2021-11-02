@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Spinner } from 'reactstrap';
 import styled from 'styled-components';
-import { signInUser } from '../api/auth';
 import img from '../images/homeBackgroundImage.png';
+import SignInButton from '../components/buttons/SignInButton';
 
 const LoggedOutBackgroundImage = styled.div`
   border: 1px solid #000;
@@ -19,6 +19,15 @@ const LoggedOutBackgroundImage = styled.div`
     font-weight: 400;
     font-family: 'Heebo', sans-serif;
     text-shadow: 2px 2px #a9a29e;
+  }
+
+  p {
+    color: #444430;
+    font-family: 'Nothing You Could Do', cursive;
+    font-weight: bold;
+    font-size: 200%;
+
+    margin-top: 50px;
   }
 
   button {
@@ -40,14 +49,9 @@ export default function SignIn({ user }) {
           </div>
         ) : (
           <div className="text-center mt-5">
-            <h1>Welcome to React Repurposers!</h1>
-            <button
-              type="button"
-              className="btn btn-outline-secondary"
-              onClick={signInUser}
-            >
-              Login
-            </button>
+            <h1>Welcome to Stuff Hoarder!</h1>
+            <p>Sign in to start collecting</p>
+            <SignInButton />
           </div>
         )}
       </LoggedOutBackgroundImage>
