@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { createStuff, updateStuff } from '../api/data/stuffData';
 import { BackgroundImage } from '../views/Home';
 
-const FormContainer = styled.div`
+export const FormContainer = styled.div`
   width: 65%;
   margin: auto;
   padding: 50px 0;
@@ -46,7 +46,7 @@ const initialState = {
   itemDescription: '',
 };
 
-export default function Form({ stuffObj }) {
+export function Form({ stuffObj }) {
   const [formInput, setFormInput] = useState(initialState);
   const history = useHistory();
 
