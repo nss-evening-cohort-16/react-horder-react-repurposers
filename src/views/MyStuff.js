@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getAllStuff } from '../api/data/stuffData';
 import Polaroid from '../components/Polaroid';
+import SearchStuff from '../components/SearchStuff';
 import backgroundImage from '../images/homeBackgroundImage.png';
 
 const Background = styled.div`
@@ -24,19 +25,26 @@ const MyStuffView = styled.div`
 
 export default function MyStuff() {
   const [items, setItems] = useState([]);
+  const [allItems, setAllItems] = useState([]);
+
   useEffect(() => {
     let isMounted = true;
     getAllStuff().then((stuffs) => {
-      if (isMounted) setItems(stuffs);
+      if (isMounted) {
+        setItems(stuffs);
+        setAllItems(stuffs);
+      }
     });
     return () => {
       isMounted = false;
     };
-  });
+  }, []);
+
   return (
     <>
       <Background>
         <h1 className="myStuffTitle">MY STUFF</h1>
+        <SearchStuff items={items} allItems={allItems} setItems={setItems} />
         <MyStuffView>
           {items.map((stuff) => (
             <Polaroid key={stuff.firebaseKey} stuff={stuff} />
