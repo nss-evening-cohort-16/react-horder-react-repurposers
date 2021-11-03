@@ -12,13 +12,6 @@ const EntryForm = styled.form`
   min-width: 300px;
   max-width: 50%;
 
-  h5 {
-    text-align: center;
-    font-size: 35px;
-    color: #a56a26;
-    font-family: 'Nothing You Could Do', cursive;
-  }
-
   button {
     font-family: 'Heebo', sans-serif;
     background-color: #e0ccaa;
@@ -77,8 +70,12 @@ export default function Form({ stuffObj }) {
 
   return (
     <EntryForm onSubmit={handleSubmit}>
-      <h1>SAVE STUFF</h1>
-      <h5>Add what you want to save below!</h5>
+      <h1>{stuffObj.firebaseKey ? 'EDIT' : 'SAVE'} STUFF</h1>
+      <h5>
+        {stuffObj.firebaseKey
+          ? 'Update item information below!'
+          : 'Add what you want to save below!'}
+      </h5>
       <input
         className="form-control form-control-lg me-1 input"
         type="text"

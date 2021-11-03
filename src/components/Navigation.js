@@ -11,7 +11,7 @@ const NavBar = styled.div`
   justify-content: space-between;
   background-image: url(${img});
   padding: 10px;
-  border-bottom: 1px solid black;
+  border-bottom: 2px dashed black;
 `;
 
 const NavContainer = styled.div`

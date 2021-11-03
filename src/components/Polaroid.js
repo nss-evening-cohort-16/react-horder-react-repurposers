@@ -46,9 +46,10 @@ const Photo = styled.img`
 `;
 
 const Caption = styled.div`
-  height: 100%;
   display: flex;
   align-items: center;
+  height: 100%;
+
   color: #444340;
   font-family: 'Nothing You Could Do', cursive;
   font-size: 140%;
@@ -62,8 +63,8 @@ const Description = styled.div`
   align-items: center;
   height: 100%;
 
-  font-family: 'Nothing You Could Do', cursive;
   color: #444340;
+  font-family: 'Nothing You Could Do', cursive;
   font-size: 120%;
   font-weight: bold;
 

@@ -3,10 +3,6 @@ import styled from 'styled-components';
 export default function PageBackground(image) {
   return styled.div`
     background-image: url(${image});
-    /* position: static; */
-    height: 100%;
-    width: 100%;
-    background-repeat: repeat;
 
     display: flex;
     flex-direction: column;
@@ -16,11 +12,17 @@ export default function PageBackground(image) {
 
     h1 {
       color: #444430;
-      text-align: center;
+      font-family: 'Heebo', sans-serif;
       font-size: 84px;
       font-weight: 400;
-      font-family: 'Heebo', sans-serif;
       text-shadow: 2px 2px #a9a29e;
+    }
+
+    h5 {
+      color: #a56a26;
+      font-family: 'Nothing You Could Do', cursive;
+      font-size: 35px;
+      font-weight: bold;
     }
   `;
 }
