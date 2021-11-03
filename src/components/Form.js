@@ -12,27 +12,11 @@ const EntryForm = styled.form`
   min-width: 300px;
   max-width: 50%;
 
-  h1 {
-    color: #444430;
-    text-align: center;
-    font-size: 84px;
-    font-weight: 400;
-    font-family: 'Heebo', sans-serif;
-    text-shadow: 2px 2px #a9a29e;
-  }
-
   h5 {
     text-align: center;
     font-size: 35px;
     color: #a56a26;
     font-family: 'Nothing You Could Do', cursive;
-  }
-
-  .input {
-    font-size: 18px;
-    color: #a56a26;
-    font-family: 'Nothing You Could Do', cursive;
-    text-align: center;
   }
 
   button {
