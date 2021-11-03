@@ -56,9 +56,13 @@ export default function Details({ stuff }) {
 
 Details.propTypes = {
   stuff: PropTypes.shape({
-    itemName: PropTypes.string.isRequired,
-    itemImage: PropTypes.string.isRequired,
-    itemDescription: PropTypes.string.isRequired,
-    firebaseKey: PropTypes.string.isRequired,
-  }).isRequired,
+    itemName: PropTypes.string,
+    itemImage: PropTypes.string,
+    itemDescription: PropTypes.string,
+    firebaseKey: PropTypes.string,
+  }),
+};
+
+Details.defaultProps = {
+  stuff: {},
 };

@@ -19,5 +19,9 @@ export default function DeleteButton({ firebaseKey }) {
 }
 
 DeleteButton.propTypes = {
-  firebaseKey: PropTypes.string.isRequired,
+  firebaseKey: PropTypes.string,
+};
+
+DeleteButton.defaultProps = {
+  firebaseKey: '',
 };

@@ -11,5 +11,9 @@ export default function EditButton({ firebaseKey }) {
 }
 
 EditButton.propTypes = {
-  firebaseKey: PropTypes.string.isRequired,
+  firebaseKey: PropTypes.string,
+};
+
+EditButton.defaultProps = {
+  firebaseKey: '',
 };

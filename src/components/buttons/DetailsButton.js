@@ -11,5 +11,9 @@ export default function DetailsButton({ firebaseKey }) {
 }
 
 DetailsButton.propTypes = {
-  firebaseKey: PropTypes.string.isRequired,
+  firebaseKey: PropTypes.string,
+};
+
+DetailsButton.defaultProps = {
+  firebaseKey: '',
 };
