@@ -14,11 +14,9 @@ export default function ItemCounter() {
 
   useEffect(() => {
     let isMounted = true;
-
     getAllStuff().then((item) => {
       if (isMounted) setItemCount(item);
     });
-
     return () => {
       isMounted = false;
     };

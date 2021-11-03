@@ -112,6 +112,6 @@ Polaroid.propTypes = {
     itemName: PropTypes.string.isRequired,
     itemImage: PropTypes.string.isRequired,
     itemDescription: PropTypes.string.isRequired,
-    firebaseKey: PropTypes.string.isRequired,
+    firebaseKey: PropTypes.string,
   }).isRequired,
 };

@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import Form from '../components/Form';
 import { getSingleStuff } from '../api/data/stuffData';
-import PageBackground from '../components/PageBackground';
-import image from '../images/pageBackgroundImage.png';
-
-const Background = PageBackground(image);
 
 export default function EditStuffView() {
   const [editStuff, setEditStuff] = useState({});
@@ -22,11 +18,7 @@ export default function EditStuffView() {
     };
   }, []);
 
-  return (
-    <Background>
-      <Form stuffObj={editStuff} />
-    </Background>
-  );
+  return <Form stuffObj={editStuff} />;
 }
 
 EditStuffView.propTypes = {

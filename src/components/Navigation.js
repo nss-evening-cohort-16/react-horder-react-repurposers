@@ -35,12 +35,6 @@ const NavContainer = styled.div`
   a:hover {
     text-shadow: 2px 2px #a9a29e;
   }
-
-  .btn-styling {
-    font-family: 'Heebo', sans-serif;
-    background-color: #e0ccaa;
-    outline-color: #a56a26;
-  }
 `;
 
 export default function Navigation({ user }) {
