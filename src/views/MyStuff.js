@@ -32,7 +32,7 @@ export default function MyStuff() {
 
   return (
     <>
-      <Page style={{ padding: '40px 140px' }}>
+      <Page>
         <h1>MY STUFF</h1>
         <SearchStuff allItems={allItems} setItems={setItems} />
       </Page>
