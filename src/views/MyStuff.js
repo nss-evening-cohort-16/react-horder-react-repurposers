@@ -36,6 +36,7 @@ export default function MyStuff() {
         <h1>MY STUFF</h1>
         <SearchStuff allItems={allItems} setItems={setItems} />
       </Page>
+      <hr />
       <MyStuffView>
         {items.map((item) => (
           <Polaroid key={item.firebaseKey || 'notFound'} item={item} />
