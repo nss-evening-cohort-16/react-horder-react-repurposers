@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { getAllStuff } from '../api/data/stuffData';
 import Polaroid from '../components/Polaroid';
@@ -36,33 +35,54 @@ export default function MyStuff() {
     };
   });
 
+  const handleClick = (method) => {
+    if (method === 'for-home') {
+      items
+        .filter((stuffs) => stuffs.category === 'For Home')
+        .map((filteredCategory) => ({ filteredCategory }));
+      console.warn(items);
+    }
+    if (method === 'for-body') {
+      items
+        .filter((item) => item.category === 'For Body')
+        .map((filteredCategory) => ({ filteredCategory }));
+    }
+    if (method === 'for-food') {
+      items
+        .filter((item) => item.category === 'For Food')
+        .map((filteredCategory) => ({ filteredCategory }));
+    }
+  };
+
   return (
     <>
       <Background>
-        <h1 className="myStuffTitle">MY STUFF</h1>
-        <div className="dropdown">
-          <button
-            className="btn btn-secondary dropdown-toggle"
-            type="button"
-            id="dropdownMenu2"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            CATEGORY
-          </button>
-          <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <li className="list-group-item">For Body</li>
-            <li className="list-group-item">For Home</li>
-            <li className="list-group-item">For Food</li>
-            <li>
-              <hr className="dropdown-divider" />
-            </li>
-            <li>
-              <Link className="linkStyling" to="/new">
-                NEW
-              </Link>
-            </li>
-          </ul>
+        <h1 className="my-stuff-title">MY STUFF</h1>
+        <div>
+          <h5 className="category-header">CATEGORIES</h5>
+          <div className="category-button-container">
+            <button
+              onClick={() => handleClick('for-home')}
+              type="button"
+              className="btn btn-secondary"
+            >
+              For Body
+            </button>
+            <button
+              onClick={() => handleClick('for-home')}
+              type="button"
+              className="btn btn-secondary"
+            >
+              For Home
+            </button>
+            <button
+              onClick={() => handleClick('for-food')}
+              type="button"
+              className="btn btn-secondary"
+            >
+              For Food
+            </button>
+          </div>
         </div>
         <MyStuffView>
           {items.map((stuff) => (
