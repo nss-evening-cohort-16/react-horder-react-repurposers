@@ -32,7 +32,7 @@ const NavContainer = styled.div`
   }
 
   a:hover {
-    text-decoration: underline;
+    text-shadow: 2px 2px #a9a29e;
   }
 
   .btn-styling {

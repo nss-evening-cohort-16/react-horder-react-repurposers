@@ -11,7 +11,6 @@ const Photo = styled.img`
   padding: 1px;
   border: 1px solid black;
   border-radius: 2px;
-  margin-top: 50px;
   box-shadow: 5px 5px 10px 0px;
 `;
 

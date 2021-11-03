@@ -12,7 +12,7 @@ export default function PageBackground(image) {
     flex-direction: column;
     align-items: center;
 
-    padding-top: 50px;
+    padding: 50px 0px;
 
     h1 {
       color: #444430;

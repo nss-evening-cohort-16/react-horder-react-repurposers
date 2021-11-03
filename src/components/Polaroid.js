@@ -24,6 +24,11 @@ const PolaroidSide = styled.div`
 
   position: relative;
   z-index: 0;
+
+  &:hover {
+    box-shadow: 15px 15px 15px 1px;
+    transform: translate(-4px, -4px);
+  }
 `;
 
 const PhotoShadow = styled.div`
@@ -85,11 +90,15 @@ export default function Polaroid({ stuff }) {
       </PolaroidSide>
       <PolaroidSide id="back" onClick={handleClick}>
         <Description>{stuff.itemDescription}</Description>
-        <ButtonContainer>
-          <DetailsButton firebaseKey={stuff.firebaseKey} />
-          <EditButton firebaseKey={stuff.firebaseKey} />
-          <DeleteButton firebaseKey={stuff.firebaseKey} />
-        </ButtonContainer>
+        {stuff.firebaseKey ? (
+          <ButtonContainer>
+            <DetailsButton firebaseKey={stuff.firebaseKey} />
+            <EditButton firebaseKey={stuff.firebaseKey} />
+            <DeleteButton firebaseKey={stuff.firebaseKey} />
+          </ButtonContainer>
+        ) : (
+          <></>
+        )}
       </PolaroidSide>
     </ReactCardFlip>
   );

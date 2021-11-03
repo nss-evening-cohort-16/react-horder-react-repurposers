@@ -10,7 +10,9 @@ export default function DeleteButton({ firebaseKey }) {
       type="button"
       className="btn btn-outline-secondary"
       onClick={() => {
-        deleteStuff(firebaseKey).then(() => history.push('/stuff'));
+        deleteStuff(firebaseKey).then(() => {
+          history.push('/stuff');
+        });
       }}
     >
       <i className="fas fa-trash-alt" />
