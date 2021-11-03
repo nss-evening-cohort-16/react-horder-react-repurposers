@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const SearchBar = styled.input`
-  min-width: 250px;
-  max-width: 35%;
-
-  margin: 30px 0px;
+  margin-top: 20px;
 `;
 
 const notFoundObj = {

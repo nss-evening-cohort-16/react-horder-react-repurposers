@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSingleStuff } from '../api/data/stuffData';
 import Details from '../components/Details';
+import PaperContainer from '../components/PaperContainer';
+
+const Page = PaperContainer();
 
 export default function SingleStuff() {
   const { key } = useParams();
@@ -10,5 +13,9 @@ export default function SingleStuff() {
     getSingleStuff(key).then(setSingleStuff);
   }, []);
 
-  return <Details stuff={singleStuff} />;
+  return (
+    <Page>
+      <Details stuff={singleStuff} />
+    </Page>
+  );
 }

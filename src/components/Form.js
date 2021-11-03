@@ -9,8 +9,6 @@ const EntryForm = styled.form`
   flex-direction: column;
   align-items: center;
   row-gap: 10px;
-  min-width: 300px;
-  max-width: 50%;
 
   button {
     font-family: 'Heebo', sans-serif;
