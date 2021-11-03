@@ -27,6 +27,7 @@ const NavContainer = styled.div`
     font-size: 25px;
     text-decoration: none;
   }
+
   a:active {
     color: #a56a26;
   }

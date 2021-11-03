@@ -30,7 +30,7 @@ export default function SearchStuff({ setItems, allItems }) {
   return (
     <SearchBar
       className="form-control form-control-lg me-1 input"
-      placeholder="Search your stuff"
+      placeholder="Search for stuff"
       onChange={handleSearch}
       value={searchTerm}
     />

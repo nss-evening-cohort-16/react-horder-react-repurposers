@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default function PageBackground(image) {
   return styled.div`
     background-image: url(${image});
-    position: absolute;
+    /* position: static; */
     height: 100%;
     width: 100%;
     background-repeat: repeat;

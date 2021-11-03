@@ -108,7 +108,7 @@ export default function Form({ stuffObj }) {
         onChange={handleChange}
         placeholder="DESCRIPTION"
         maxLength="325"
-        rows="6"
+        rows="7"
         required
       />
       <button className="btn btn-outline-secondary" type="submit">

@@ -25,9 +25,11 @@ const PolaroidSide = styled.div`
   position: relative;
   z-index: 0;
 
+  transition: transform 0.4s, box-shadow 0.4s;
+
   &:hover {
+    transform: translate(-5px, -5px);
     box-shadow: 15px 15px 15px 1px;
-    transform: translate(-4px, -4px);
   }
 `;
 
@@ -74,7 +76,7 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
-export default function Polaroid({ stuff }) {
+export default function Polaroid({ item }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -84,17 +86,17 @@ export default function Polaroid({ stuff }) {
     <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
       <PolaroidSide id="front" onClick={handleClick}>
         <PhotoShadow>
-          <Photo src={stuff.itemImage} alt="ItemImage" />
+          <Photo src={item.itemImage} alt="ItemImage" />
         </PhotoShadow>
-        <Caption>{stuff.itemName}</Caption>
+        <Caption>{item.itemName}</Caption>
       </PolaroidSide>
       <PolaroidSide id="back" onClick={handleClick}>
-        <Description>{stuff.itemDescription}</Description>
-        {stuff.firebaseKey ? (
+        <Description>{item.itemDescription}</Description>
+        {item.firebaseKey ? (
           <ButtonContainer>
-            <DetailsButton firebaseKey={stuff.firebaseKey} />
-            <EditButton firebaseKey={stuff.firebaseKey} />
-            <DeleteButton firebaseKey={stuff.firebaseKey} />
+            <DetailsButton firebaseKey={item.firebaseKey} />
+            <EditButton firebaseKey={item.firebaseKey} />
+            <DeleteButton firebaseKey={item.firebaseKey} />
           </ButtonContainer>
         ) : (
           <></>
@@ -105,7 +107,7 @@ export default function Polaroid({ stuff }) {
 }
 
 Polaroid.propTypes = {
-  stuff: PropTypes.shape({
+  item: PropTypes.shape({
     itemName: PropTypes.string.isRequired,
     itemImage: PropTypes.string.isRequired,
     itemDescription: PropTypes.string.isRequired,

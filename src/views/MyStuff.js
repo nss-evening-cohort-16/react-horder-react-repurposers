@@ -35,10 +35,10 @@ export default function MyStuff() {
     <>
       <Background>
         <h1>MY STUFF</h1>
-        <SearchStuff items={items} allItems={allItems} setItems={setItems} />
+        <SearchStuff allItems={allItems} setItems={setItems} />
         <MyStuffView>
-          {items.map((stuff) => (
-            <Polaroid key={stuff.firebaseKey} stuff={stuff} />
+          {items.map((item) => (
+            <Polaroid key={item.firebaseKey} item={item} />
           ))}
         </MyStuffView>
       </Background>
