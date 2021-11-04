@@ -39,7 +39,8 @@ export default function MyStuff() {
       <Page>
         <h1>MY STUFF</h1>
         <SearchStuff allItems={allItems} setItems={setItems} />
-        <h5 className="category-header">CATEGORIES</h5>
+        <hr />
+        <h5>CATEGORIES</h5>
         <div className="category-button-container">
           <button
             onClick={() => handleClick('For Body')}
