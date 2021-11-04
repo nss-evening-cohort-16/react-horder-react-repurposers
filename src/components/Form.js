@@ -12,6 +12,13 @@ const EntryForm = styled.form`
   row-gap: 10px;
 `;
 
+const ErrorMessage = styled.div`
+  color: red;
+  // font-weight: bold;
+  font-family: 'Heebo', sans-serif;
+  font-size: 18px;
+`;
+
 const initialState = {
   itemName: '',
   itemImage: '',
@@ -23,6 +30,7 @@ const initialState = {
 export default function Form({ stuffObj }) {
   const [formInput, setFormInput] = useState(initialState);
   const history = useHistory();
+  const [showError, setShowError] = useState(false);
 
   useEffect(() => {
     if (stuffObj.firebaseKey) {
@@ -63,8 +71,17 @@ export default function Form({ stuffObj }) {
     }
   };
 
+  const categoryRequired = (e) => {
+    e.preventDefault();
+    if (stuffObj.category) {
+      handleSubmit(e);
+    } else {
+      setShowError(true);
+    }
+  };
+
   return (
-    <EntryForm onSubmit={handleSubmit}>
+    <EntryForm onSubmit={categoryRequired}>
       <h1>{stuffObj.firebaseKey ? 'EDIT' : 'SAVE'} STUFF</h1>
       <h5>
         {stuffObj.firebaseKey
@@ -104,6 +121,11 @@ export default function Form({ stuffObj }) {
         required
       />
       <CategoryDropdown formInput={formInput} setFormInput={setFormInput} />
+      {showError ? (
+        <ErrorMessage className="error">MUST SELECT CATEGORY!</ErrorMessage>
+      ) : (
+        <></>
+      )}
       <button className="btn btn-outline-secondary" type="submit">
         {stuffObj.firebaseKey ? 'UPDATE' : 'SUBMIT'}
       </button>

@@ -81,7 +81,11 @@ export function CategoryDropdown({ formInput, setFormInput }) {
         </DropdownToggle>
         <DropdownMenu>
           {catArray.map((category) => (
-            <DropdownItem onClick={selectCategory} key={category.firebaseKey}>
+            <DropdownItem
+              required
+              onClick={selectCategory}
+              key={category.firebaseKey}
+            >
               {category.category}
             </DropdownItem>
           ))}
