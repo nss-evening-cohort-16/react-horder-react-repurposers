@@ -33,26 +33,21 @@ export default function MyStuff() {
     return () => {
       isMounted = false;
     };
-  });
+  }, []);
 
   const handleClick = (method) => {
-    if (method === 'for-home') {
-      items
-        .filter((stuffs) => stuffs.category === 'For Home')
-        .map((filteredCategory) => ({ filteredCategory }));
-      console.warn(items);
-    }
-    if (method === 'for-body') {
-      items
-        .filter((item) => item.category === 'For Body')
-        .map((filteredCategory) => ({ filteredCategory }));
-    }
-    if (method === 'for-food') {
-      items
-        .filter((item) => item.category === 'For Food')
-        .map((filteredCategory) => ({ filteredCategory }));
-    }
+    setItems(items.filter((item) => item.category === method));
   };
+
+  // const renderWithFilter = () => {
+  //   items.filter((item) => item.category === method).map((stuff) => (
+  //     <Polaroid key={stuff.firebaseKey} stuff={stuff} />
+  //   ));
+  // };
+
+  // const renderWithoutFilter = () => {
+  //   items.map((stuff) => <Polaroid key={stuff.firebaseKey} stuff={stuff} />);
+  // };
 
   return (
     <>
@@ -62,21 +57,21 @@ export default function MyStuff() {
           <h5 className="category-header">CATEGORIES</h5>
           <div className="category-button-container">
             <button
-              onClick={() => handleClick('for-home')}
+              onClick={() => handleClick('For Body')}
               type="button"
               className="btn btn-secondary"
             >
               For Body
             </button>
             <button
-              onClick={() => handleClick('for-home')}
+              onClick={() => handleClick('For Home')}
               type="button"
               className="btn btn-secondary"
             >
               For Home
             </button>
             <button
-              onClick={() => handleClick('for-food')}
+              onClick={() => handleClick('For Food')}
               type="button"
               className="btn btn-secondary"
             >
