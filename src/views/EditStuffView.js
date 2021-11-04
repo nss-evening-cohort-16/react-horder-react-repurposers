@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import Form from '../components/Form';
+import { Form } from '../components/Form';
 import { getSingleStuff } from '../api/data/stuffData';
 
 export default function EditStuffView() {
