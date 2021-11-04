@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { createStuff, updateStuff } from '../api/data/stuffData';
 import { BackgroundImage } from '../views/Home';
+import { ButtonStyling, CategoryDropdown } from './CategoryDropdown';
 
 const FormContainer = styled.div`
   width: 65%;
@@ -32,13 +33,6 @@ const FormContainer = styled.div`
     font-family: 'Nothing You Could Do', cursive;
   }
 
-  button {
-    font-family: 'Heebo', sans-serif;
-    background-color: #e0ccaa;
-    outline-color: #a56a26;
-    margin: 10px;
-  }
-
   .linkStyling {
   }
 `;
@@ -48,6 +42,7 @@ const initialState = {
   itemImage: '',
   firebaseKey: '',
   itemDescription: '',
+  category: '',
 };
 
 export default function Form({ stuffObj }) {
@@ -61,6 +56,7 @@ export default function Form({ stuffObj }) {
         itemImage: stuffObj.itemImage,
         firebaseKey: stuffObj.firebaseKey,
         itemDescription: stuffObj.itemDescription,
+        category: stuffObj.category,
       });
     }
   }, [stuffObj]);
@@ -129,34 +125,13 @@ export default function Form({ stuffObj }) {
               placeholder="DESCRIPTION"
               required
             />
-            <div className="dropdown">
-              <button
-                className="btn btn-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenu2"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                CATEGORY
-              </button>
-              <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <li className="list-group-item">A second item</li>
-                <li className="list-group-item">A third item</li>
-                <li className="list-group-item">A fourth item</li>
-                <li className="list-group-item">And a fifth one</li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <Link className="linkStyling" to="/new">
-                    NEW
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <button className="btn btn-outline-secondary" type="submit">
+            <CategoryDropdown
+              formInput={formInput}
+              setFormInput={setFormInput}
+            />
+            <ButtonStyling className="btn btn-outline-secondary" type="submit">
               {stuffObj.firebaseKey ? 'UPDATE' : 'SUBMIT'}
-            </button>
+            </ButtonStyling>
           </div>
         </form>
       </FormContainer>
@@ -171,6 +146,7 @@ Form.propTypes = {
     itemImage: PropTypes.string,
     itemDescription: PropTypes.string,
     uid: PropTypes.string,
+    category: PropTypes.string,
   }),
 };
 
