@@ -6,6 +6,7 @@ import {
   DropdownItem,
 } from 'reactstrap';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { getAllCategories } from '../api/data/categoryData';
 import { getAllStuff } from '../api/data/stuffData';
 
@@ -16,11 +17,15 @@ export const ButtonStyling = styled.button`
   margin: 10px;
 `;
 
-export function ShowCategoryDropdown() {
+export function ShowCategoryDropdown({
+  items,
+  setItems,
+  allItems,
+  setAllItems,
+}) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [catArray, setCatArray] = useState([]);
-  const [items, setItems] = useState([]);
-  const [allItems, setAllItems] = useState([]);
+  const [filter, setFilter] = useState('');
 
   const toggle = () => setDropdownOpen(!dropdownOpen);
 
@@ -40,11 +45,9 @@ export function ShowCategoryDropdown() {
 
   const selectCategory = (e) => {
     const { innerText } = e.target;
-    setCatArray((prevState) => ({
-      ...prevState,
-      category: innerText,
-    }));
-    setItems(allItems.filter((item) => item.category === e.target.id));
+    console.warn(filter);
+    setFilter(innerText);
+    setItems(allItems.filter((item) => item.category === innerText));
     setDropdownOpen(false);
   };
 
@@ -69,3 +72,10 @@ export function ShowCategoryDropdown() {
     </>
   );
 }
+
+ShowCategoryDropdown.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setItems: PropTypes.func.isRequired,
+  allItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setAllItems: PropTypes.func.isRequired,
+};

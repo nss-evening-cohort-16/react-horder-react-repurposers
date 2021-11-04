@@ -42,7 +42,12 @@ export default function MyStuff() {
         <SearchStuff allItems={allItems} setItems={setItems} />
         <hr />
         <h5>CATEGORIES</h5>
-        <ShowCategoryDropdown />
+        <ShowCategoryDropdown
+          items={items}
+          setItems={setItems}
+          allItems={allItems}
+          setAllItems={setAllItems}
+        />
       </Page>
       <hr />
       <MyStuffView>
