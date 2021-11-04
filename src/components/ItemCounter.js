@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getAllStuff } from '../api/data/stuffData';
 
-const CardContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 60px;
+const Counter = styled.div`
+  color: #444430;
+  font-family: 'Nothing You Could Do', cursive;
+  font-size: 600%;
+  font-weight: bold;
 `;
 
 export default function ItemCounter() {
@@ -13,22 +14,18 @@ export default function ItemCounter() {
 
   useEffect(() => {
     let isMounted = true;
-
     getAllStuff().then((item) => {
       if (isMounted) setItemCount(item);
     });
-
     return () => {
       isMounted = false;
     };
   }, []);
 
   return (
-    <CardContainer>
-      <div className="card" style={{ width: '48rem', margin: 'auto' }}>
-        <h3 className="card-title">Total Items In Collection:</h3>
-        <h3>{itemCount.length}</h3>
-      </div>
-    </CardContainer>
+    <>
+      <h5>Total Items In Collection:</h5>
+      <Counter>{itemCount.length}</Counter>
+    </>
   );
 }

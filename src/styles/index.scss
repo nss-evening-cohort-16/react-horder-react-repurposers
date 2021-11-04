@@ -3,21 +3,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@900&family=Nothing+You+Could+Do&display=swap');
 
 body {
-  background-color: #A56A26 !important;
+  background-image: url(../images/homeBackgroundImage.png);
 }
 
-.myStuffTitle {
+.input {
+  font-size: 18px;
+  color: #a56a26;
+  font-family: 'Nothing You Could Do', cursive;
   text-align: center;
-  color: #444430;
-  font-size: 84px;
-  font-weight: 400;
-  font-family: 'Heebo', sans-serif;
-  text-shadow: 2px 2px #A9A29E;
-  padding-top: 50px;
-}
-
-.card-styling {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }

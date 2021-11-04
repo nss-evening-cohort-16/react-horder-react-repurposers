@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
-import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { deleteStuff } from '../api/data/stuffData';
 import polaroidTexture from '../images/pageBackgroundImage.png';
+import DeleteButton from './buttons/DeleteButton';
+import EditButton from './buttons/EditButton';
+import DetailsButton from './buttons/DetailsButton';
 
 const PolaroidSide = styled.div`
   background-image: url(${polaroidTexture});
@@ -17,11 +18,19 @@ const PolaroidSide = styled.div`
   width: 3.5in;
   height: 4.2in;
   padding: 20px;
+  border-radius: 1px;
+  margin: 20px;
   box-shadow: 10px 10px 10px 0px;
-  margin: 10px;
 
   position: relative;
   z-index: 0;
+
+  transition: transform 0.4s, box-shadow 0.4s;
+
+  &:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 15px 15px 15px 1px;
+  }
 `;
 
 const PhotoShadow = styled.div`
@@ -37,9 +46,10 @@ const Photo = styled.img`
 `;
 
 const Caption = styled.div`
-  height: 100%;
   display: flex;
   align-items: center;
+  height: 100%;
+
   color: #444340;
   font-family: 'Nothing You Could Do', cursive;
   font-size: 140%;
@@ -53,8 +63,8 @@ const Description = styled.div`
   align-items: center;
   height: 100%;
 
-  font-family: 'Nothing You Could Do', cursive;
   color: #444340;
+  font-family: 'Nothing You Could Do', cursive;
   font-size: 120%;
   font-weight: bold;
 
@@ -67,9 +77,7 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
-export default function Polaroid({ stuff }) {
-  const history = useHistory();
-
+export default function Polaroid({ item }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -77,42 +85,33 @@ export default function Polaroid({ stuff }) {
 
   return (
     <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-      <PolaroidSide onClick={handleClick}>
+      <PolaroidSide id="front" onClick={handleClick}>
         <PhotoShadow>
-          <Photo src={stuff.itemImage} alt="ItemImage" />
+          <Photo src={item.itemImage} alt="ItemImage" />
         </PhotoShadow>
-        <Caption>{stuff.itemName}</Caption>
+        <Caption>{item.itemName}</Caption>
       </PolaroidSide>
-      <PolaroidSide onClick={handleClick}>
-        <Description>{stuff.itemDescription}</Description>
-        <ButtonContainer>
-          <Link
-            to={`/stuff/${stuff.firebaseKey}`}
-            className="btn btn-outline-secondary"
-          >
-            <i className="fas fa-paperclip" />
-          </Link>
-          <Link
-            to={`/edit/${stuff.firebaseKey}`}
-            className="btn btn-outline-secondary"
-          >
-            <i className="fas fa-edit" />
-          </Link>
-          <button
-            type="button"
-            className="btn btn-outline-secondary"
-            onClick={() => {
-              deleteStuff(stuff.firebaseKey).then(() => history.push('/stuff'));
-            }}
-          >
-            <i className="fas fa-trash-alt" />
-          </button>
-        </ButtonContainer>
+      <PolaroidSide id="back" onClick={handleClick}>
+        <Description>{item.itemDescription}</Description>
+        {item.firebaseKey ? (
+          <ButtonContainer>
+            <DetailsButton firebaseKey={item.firebaseKey} />
+            <EditButton firebaseKey={item.firebaseKey} />
+            <DeleteButton firebaseKey={item.firebaseKey} />
+          </ButtonContainer>
+        ) : (
+          <></>
+        )}
       </PolaroidSide>
     </ReactCardFlip>
   );
 }
 
 Polaroid.propTypes = {
-  stuff: PropTypes.shape().isRequired,
+  item: PropTypes.shape({
+    itemName: PropTypes.string.isRequired,
+    itemImage: PropTypes.string.isRequired,
+    itemDescription: PropTypes.string.isRequired,
+    firebaseKey: PropTypes.string,
+  }).isRequired,
 };

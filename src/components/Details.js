@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link, useHistory } from 'react-router-dom';
-import { deleteStuff } from '../api/data/stuffData';
+import DeleteButton from './buttons/DeleteButton';
+import EditButton from './buttons/EditButton';
 
 const Photo = styled.img`
   max-width: 600px;
@@ -11,7 +11,6 @@ const Photo = styled.img`
   padding: 1px;
   border: 1px solid black;
   border-radius: 2px;
-  box-shadow: 5px 5px 10px 0px;
 `;
 
 const Title = styled.div`
@@ -40,34 +39,28 @@ const ButtonContainer = styled.div`
 `;
 
 export default function Details({ stuff }) {
-  const history = useHistory();
-
   return (
     <>
       <Photo src={stuff.itemImage} alt={stuff.itemName} />
       <Title>{stuff.itemName}</Title>
       <Description>{stuff.itemDescription}</Description>
       <ButtonContainer>
-        <Link
-          to={`/edit/${stuff.firebaseKey}`}
-          className="btn btn-outline-secondary"
-        >
-          <i className="fas fa-edit" />
-        </Link>
-        <button
-          type="button"
-          className="btn btn-outline-secondary"
-          onClick={() => {
-            deleteStuff(stuff.firebaseKey).then(() => history.push('/stuff'));
-          }}
-        >
-          <i className="fas fa-trash-alt" />
-        </button>
+        <EditButton firebaseKey={stuff.firebaseKey} />
+        <DeleteButton firebaseKey={stuff.firebaseKey} />
       </ButtonContainer>
     </>
   );
 }
 
 Details.propTypes = {
-  stuff: PropTypes.shape().isRequired,
+  stuff: PropTypes.shape({
+    itemName: PropTypes.string,
+    itemImage: PropTypes.string,
+    itemDescription: PropTypes.string,
+    firebaseKey: PropTypes.string,
+  }),
+};
+
+Details.defaultProps = {
+  stuff: {},
 };

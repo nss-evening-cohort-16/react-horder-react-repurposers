@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { FormContainer } from './Form';
+import styled from 'styled-components';
+
+const SearchBar = styled.input`
+  margin-top: 20px;
+`;
+
+const notFoundObj = {
+  itemName: 'No Search Results',
+  itemImage: 'https://static.thenounproject.com/png/4147389-200.png',
+  itemDescription: 'Could not find any stuff with current search term. Sorry.',
+};
 
 export default function SearchStuff({ setItems, allItems }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -11,17 +21,16 @@ export default function SearchStuff({ setItems, allItems }) {
 
   useEffect(() => {
     const results = allItems.filter((item) => item.itemName.toLowerCase().includes(searchTerm.toLowerCase()));
-    setItems(results);
+    setItems(results.length > 0 ? results : [notFoundObj]);
   }, [searchTerm]);
 
   return (
-    <FormContainer>
-      <input
-        placeholder="Search your stuff"
-        onChange={handleSearch}
-        value={searchTerm}
-      />
-    </FormContainer>
+    <SearchBar
+      className="form-control form-control-lg me-1 input"
+      placeholder="Search for stuff"
+      onChange={handleSearch}
+      value={searchTerm}
+    />
   );
 }
 SearchStuff.propTypes = {

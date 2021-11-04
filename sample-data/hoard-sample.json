@@ -1,4 +1,12 @@
 {
+  "item1" : {
+    "firebaseKey" : "item1",
+    "itemDescription" : "Join the hunt for Wally in this wonderful adventure! Take the Wally challenge and see many wondrous Wonderlands! Wally and friends are hiding in every detailed scene. Full of eye-boggling extras and hours of fun, this fifth classic Wally adventure comes with a striking new cover.",
+    "itemImage" : "https://images-na.ssl-images-amazon.com/images/I/615IpbOcbvL._SX258_BO1,204,203,200_.jpg",
+    "itemName" : "Where's Waldo Book",
+    "uid" : "56789",
+    "category" :"For Home"
+  },
   "item10" : {
     "firebaseKey" : "item10",
     "itemDescription" : "For the indoor cat who wishes he were an outdoor cat, a suction-cup hammock that will let him survey his many winged enemies at close range.",
