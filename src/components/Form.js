@@ -75,6 +75,7 @@ export function Form({ stuffObj }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.warn('clicked     ');
     if (stuffObj.firebaseKey) {
       updateStuff(formInput).then(() => {
         resetForm();
