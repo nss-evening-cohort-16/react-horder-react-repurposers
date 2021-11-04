@@ -69,7 +69,6 @@ export function CategoryDropdown({ formInput, setFormInput }) {
       setCatArray(array);
       resetForm();
       setShowInput(false);
-      // setDropdownOpen(false);
     });
   };
 

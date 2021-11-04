@@ -1,9 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { deleteStuff } from '../../api/data/stuffData';
+import { deleteStuff, getAllStuff } from '../../api/data/stuffData';
 
-export default function DeleteButton({ firebaseKey }) {
+export default function DeleteButton({ firebaseKey, setAllItems }) {
   const history = useHistory();
   return (
     <button
@@ -11,6 +11,7 @@ export default function DeleteButton({ firebaseKey }) {
       className="btn btn-outline-secondary"
       onClick={() => {
         deleteStuff(firebaseKey).then(() => {
+          getAllStuff().then(setAllItems);
           history.push('/stuff');
         });
       }}
@@ -22,8 +23,10 @@ export default function DeleteButton({ firebaseKey }) {
 
 DeleteButton.propTypes = {
   firebaseKey: PropTypes.string,
+  setAllItems: PropTypes.func,
 };
 
 DeleteButton.defaultProps = {
   firebaseKey: '',
+  setAllItems: () => {},
 };
