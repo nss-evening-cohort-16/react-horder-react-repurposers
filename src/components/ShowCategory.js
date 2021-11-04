@@ -17,12 +17,7 @@ export const ButtonStyling = styled.button`
   margin: 10px;
 `;
 
-export function ShowCategoryDropdown({
-  items,
-  setItems,
-  allItems,
-  setAllItems,
-}) {
+export function ShowCategoryDropdown({ setItems, allItems, setAllItems }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [catArray, setCatArray] = useState([]);
   const [filter, setFilter] = useState('');
@@ -45,21 +40,16 @@ export function ShowCategoryDropdown({
 
   const selectCategory = (e) => {
     const { innerText } = e.target;
-    console.warn(filter);
     setFilter(innerText);
     setItems(allItems.filter((item) => item.category === innerText));
     setDropdownOpen(false);
   };
 
-  //   const resetCategory = () => {
-  //     setCatFormInput(initialState);
-  //   };
-
   return (
     <>
       <ButtonDropdown isOpen={dropdownOpen} toggle={() => {}}>
         <DropdownToggle onClick={toggle} caret size="sm">
-          {items.category ? items.category : 'Select a Category'}
+          {filter || 'Select a Category'}
         </DropdownToggle>
         <DropdownMenu>
           {catArray.map((category) => (
@@ -74,7 +64,6 @@ export function ShowCategoryDropdown({
 }
 
 ShowCategoryDropdown.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
   setItems: PropTypes.func.isRequired,
   allItems: PropTypes.arrayOf(PropTypes.object).isRequired,
   setAllItems: PropTypes.func.isRequired,

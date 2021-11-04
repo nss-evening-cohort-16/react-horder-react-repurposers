@@ -31,17 +31,13 @@ export default function MyStuff() {
     };
   }, []);
 
-  // const handleClick = (method) => {
-  //   setItems(allItems.filter((item) => item.category === method));
-  // };
-
   return (
     <>
       <Page>
         <h1>MY STUFF</h1>
         <SearchStuff allItems={allItems} setItems={setItems} />
         <hr />
-        <h5>CATEGORIES</h5>
+        <h5>Category Filter</h5>
         <ShowCategoryDropdown
           items={items}
           setItems={setItems}
