@@ -6,7 +6,7 @@ import { createStuff, updateStuff } from '../api/data/stuffData';
 import { BackgroundImage } from '../views/Home';
 import { ButtonStyling, CategoryDropdown } from './CategoryDropdown';
 
-const FormContainer = styled.div`
+export const FormContainer = styled.div`
   width: 65%;
   margin: auto;
   padding: 50px 0;
@@ -45,7 +45,7 @@ const initialState = {
   category: '',
 };
 
-export default function Form({ stuffObj }) {
+export function Form({ stuffObj }) {
   const [formInput, setFormInput] = useState(initialState);
   const history = useHistory();
 
