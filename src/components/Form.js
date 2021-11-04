@@ -14,7 +14,6 @@ const EntryForm = styled.form`
 
 const ErrorMessage = styled.div`
   color: red;
-  // font-weight: bold;
   font-family: 'Heebo', sans-serif;
   font-size: 18px;
 `;
@@ -73,7 +72,7 @@ export default function Form({ stuffObj }) {
 
   const categoryRequired = (e) => {
     e.preventDefault();
-    if (stuffObj.category) {
+    if (formInput.category) {
       handleSubmit(e);
     } else {
       setShowError(true);

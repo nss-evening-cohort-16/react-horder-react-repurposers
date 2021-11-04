@@ -1,39 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
-const SearchBar = styled.input`
-  margin-top: 20px;
-`;
-
-const notFoundObj = {
-  itemName: 'No Search Results',
-  itemImage: 'https://static.thenounproject.com/png/4147389-200.png',
-  itemDescription: 'Could not find any stuff with current search term. Sorry.',
-};
-
-export default function SearchStuff({ setItems, allItems }) {
+export default function SearchStuff({ setSearchedItems, allItems }) {
   const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    const results = allItems.filter((item) => item.itemName.toLowerCase().includes(searchTerm.toLowerCase()));
+    setSearchedItems(results);
+  }, [searchTerm]);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  useEffect(() => {
-    const results = allItems.filter((item) => item.itemName.toLowerCase().includes(searchTerm.toLowerCase()));
-    setItems(results.length > 0 ? results : [notFoundObj]);
-  }, [searchTerm]);
-
   return (
-    <SearchBar
+    <input
       className="form-control form-control-lg me-1 input"
-      placeholder="Search for stuff"
+      placeholder="ITEM NAME"
       onChange={handleSearch}
       value={searchTerm}
     />
   );
 }
 SearchStuff.propTypes = {
-  setItems: PropTypes.func.isRequired,
+  setSearchedItems: PropTypes.func.isRequired,
   allItems: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };

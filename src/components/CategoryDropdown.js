@@ -30,7 +30,13 @@ export function CategoryDropdown({ formInput, setFormInput }) {
   const toggle = () => setDropdownOpen(!dropdownOpen);
 
   useEffect(() => {
-    getAllCategories().then(setCatArray);
+    let isMounted = true;
+    getAllCategories().then((cats) => {
+      if (isMounted) setCatArray(cats);
+    });
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handleClick = (e) => {
