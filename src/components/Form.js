@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { createStuff, updateStuff } from '../api/data/stuffData';
 import { BackgroundImage } from '../views/Home';
+import { ButtonStyling, CategoryDropdown } from './CategoryDropdown';
 
 export const FormContainer = styled.div`
   width: 65%;
@@ -32,10 +33,7 @@ export const FormContainer = styled.div`
     font-family: 'Nothing You Could Do', cursive;
   }
 
-  button {
-    font-family: 'Heebo', sans-serif;
-    background-color: #e0ccaa;
-    outline-color: #a56a26;
+  .linkStyling {
   }
 `;
 
@@ -44,6 +42,7 @@ const initialState = {
   itemImage: '',
   firebaseKey: '',
   itemDescription: '',
+  category: '',
 };
 
 export function Form({ stuffObj }) {
@@ -57,6 +56,7 @@ export function Form({ stuffObj }) {
         itemImage: stuffObj.itemImage,
         firebaseKey: stuffObj.firebaseKey,
         itemDescription: stuffObj.itemDescription,
+        category: stuffObj.category,
       });
     }
   }, [stuffObj]);
@@ -125,9 +125,13 @@ export function Form({ stuffObj }) {
               placeholder="DESCRIPTION"
               required
             />
-            <button className="btn btn-outline-secondary" type="submit">
+            <CategoryDropdown
+              formInput={formInput}
+              setFormInput={setFormInput}
+            />
+            <ButtonStyling className="btn btn-outline-secondary" type="submit">
               {stuffObj.firebaseKey ? 'UPDATE' : 'SUBMIT'}
-            </button>
+            </ButtonStyling>
           </div>
         </form>
       </FormContainer>
@@ -142,6 +146,7 @@ Form.propTypes = {
     itemImage: PropTypes.string,
     itemDescription: PropTypes.string,
     uid: PropTypes.string,
+    category: PropTypes.string,
   }),
 };
 
