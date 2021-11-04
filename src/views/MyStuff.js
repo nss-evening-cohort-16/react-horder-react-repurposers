@@ -48,7 +48,7 @@ export default function MyStuff() {
     <>
       <Page>
         <h1>MY STUFF</h1>
-        <h5>Categories</h5>
+        <h5>Filter</h5>
         <ShowCategoryDropdown
           setFilteredItems={setFilteredItems}
           allItems={allItems}
