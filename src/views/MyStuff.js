@@ -48,14 +48,14 @@ export default function MyStuff() {
     <>
       <Page>
         <h1>MY STUFF</h1>
+        <h5>Search</h5>
+        <SearchStuff setSearchedItems={setSearchedItems} allItems={allItems} />
+        <hr />
         <h5>Filter</h5>
         <ShowCategoryDropdown
           setFilteredItems={setFilteredItems}
           allItems={allItems}
         />
-        <hr />
-        <h5>Search</h5>
-        <SearchStuff setSearchedItems={setSearchedItems} allItems={allItems} />
       </Page>
       <hr />
       <MyStuffView>
