@@ -3,18 +3,13 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { createStuff, updateStuff } from '../api/data/stuffData';
+import { CategoryDropdown } from './CategoryDropdown';
 
 const EntryForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   row-gap: 10px;
-
-  button {
-    font-family: 'Heebo', sans-serif;
-    background-color: #e0ccaa;
-    outline-color: #a56a26;
-  }
 `;
 
 const initialState = {
@@ -22,6 +17,7 @@ const initialState = {
   itemImage: '',
   firebaseKey: '',
   itemDescription: '',
+  category: '',
 };
 
 export default function Form({ stuffObj }) {
@@ -35,6 +31,7 @@ export default function Form({ stuffObj }) {
         itemImage: stuffObj.itemImage,
         firebaseKey: stuffObj.firebaseKey,
         itemDescription: stuffObj.itemDescription,
+        category: stuffObj.category,
       });
     }
   }, [stuffObj]);
@@ -106,6 +103,7 @@ export default function Form({ stuffObj }) {
         rows="7"
         required
       />
+      <CategoryDropdown formInput={formInput} setFormInput={setFormInput} />
       <button className="btn btn-outline-secondary" type="submit">
         {stuffObj.firebaseKey ? 'UPDATE' : 'SUBMIT'}
       </button>
@@ -120,6 +118,7 @@ Form.propTypes = {
     itemImage: PropTypes.string,
     itemDescription: PropTypes.string,
     uid: PropTypes.string,
+    category: PropTypes.string,
   }),
 };
 
