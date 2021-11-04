@@ -40,16 +40,46 @@ export default function MyStuff() {
     };
   }, []);
 
+  const handleClick = (method) => {
+    setItems(allItems.filter((item) => item.category === method));
+  };
+
   return (
     <>
       <Background>
-        <h1 className="myStuffTitle">MY STUFF</h1>
+        <h1 className="my-stuff-title">MY STUFF</h1>
         <SearchStuff items={items} allItems={allItems} setItems={setItems} />
-        <MyStuffView>
-          {items.map((stuff) => (
-            <Polaroid key={stuff.firebaseKey} stuff={stuff} />
-          ))}
-        </MyStuffView>
+        <div>
+          <h5 className="category-header">CATEGORIES</h5>
+          <div className="category-button-container">
+            <button
+              onClick={() => handleClick('For Body')}
+              type="button"
+              className="btn btn-secondary"
+            >
+              For Body
+            </button>
+            <button
+              onClick={() => handleClick('For Home')}
+              type="button"
+              className="btn btn-secondary"
+            >
+              For Home
+            </button>
+            <button
+              onClick={() => handleClick('For Food')}
+              type="button"
+              className="btn btn-secondary"
+            >
+              For Food
+            </button>
+          </div>
+          <MyStuffView>
+            {items.map((stuff) => (
+              <Polaroid key={stuff.firebaseKey} stuff={stuff} />
+            ))}
+          </MyStuffView>
+        </div>
       </Background>
     </>
   );
