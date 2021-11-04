@@ -4,6 +4,7 @@ import { getAllStuff } from '../api/data/stuffData';
 import PaperContainer from '../components/PaperContainer';
 import Polaroid from '../components/Polaroid';
 import SearchStuff from '../components/SearchStuff';
+import { ShowCategoryDropdown } from '../components/ShowCategory';
 
 const MyStuffView = styled.div`
   display: flex;
@@ -30,9 +31,9 @@ export default function MyStuff() {
     };
   }, []);
 
-  const handleClick = (method) => {
-    setItems(allItems.filter((item) => item.category === method));
-  };
+  // const handleClick = (method) => {
+  //   setItems(allItems.filter((item) => item.category === method));
+  // };
 
   return (
     <>
@@ -41,29 +42,12 @@ export default function MyStuff() {
         <SearchStuff allItems={allItems} setItems={setItems} />
         <hr />
         <h5>CATEGORIES</h5>
-        <div className="category-button-container">
-          <button
-            onClick={() => handleClick('For Body')}
-            type="button"
-            className="btn btn-secondary"
-          >
-            For Body
-          </button>
-          <button
-            onClick={() => handleClick('For Home')}
-            type="button"
-            className="btn btn-secondary"
-          >
-            For Home
-          </button>
-          <button
-            onClick={() => handleClick('For Food')}
-            type="button"
-            className="btn btn-secondary"
-          >
-            For Food
-          </button>
-        </div>
+        <ShowCategoryDropdown
+          items={items}
+          setItems={setItems}
+          allItems={allItems}
+          setAllItems={setAllItems}
+        />
       </Page>
       <hr />
       <MyStuffView>
