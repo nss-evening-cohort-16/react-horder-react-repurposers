@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { createCategory, getAllCategories } from '../api/data/categoryData';
 
-export const ButtonStyling = styled.div`
+export const ButtonStyling = styled.button`
   font-family: 'Heebo', sans-serif;
   background-color: #e0ccaa;
   outline-color: #a56a26;
