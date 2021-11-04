@@ -81,7 +81,7 @@ export function CategoryDropdown({ formInput, setFormInput }) {
   return (
     <>
       <ButtonDropdown isOpen={dropdownOpen} toggle={() => {}}>
-        <DropdownToggle onClick={toggle} caret size="sm">
+        <DropdownToggle onClick={toggle} caret size="lg">
           {formInput.category ? formInput.category : 'Select a Category'}
         </DropdownToggle>
         <DropdownMenu>
