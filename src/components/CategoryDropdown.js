@@ -24,7 +24,7 @@ const initialState = {
 
 export default function CategoryDropdown({ formInput, setFormInput }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [showInput, setShowInput] = useState(false);
+  const [showCatForm, setShowCatForm] = useState(false);
   const [catFormInput, setCatFormInput] = useState(initialState);
   const [catArray, setCatArray] = useState([]);
 
@@ -40,11 +40,11 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
-  const toggleCatForm = () => setShowInput(!showInput);
+  const toggleCatForm = () => setShowCatForm(!showCatForm);
 
-  const resetDropdownForm = () => {
+  const resetCatForm = () => {
     setCatFormInput(initialState);
-    setShowInput(false);
+    setShowCatForm(false);
   };
 
   const selectCategory = (e) => {
@@ -54,10 +54,10 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
       category: innerText,
     }));
     setDropdownOpen(false);
-    resetDropdownForm();
+    resetCatForm();
   };
 
-  const handleChange = (e) => {
+  const handleCatChange = (e) => {
     const { name, value } = e.target;
     setCatFormInput((prevState) => ({
       ...prevState,
@@ -70,7 +70,7 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
     if (catFormInput.category.length > 0) {
       createCategory(catFormInput).then((array) => {
         setCatArray(array);
-        resetDropdownForm();
+        resetCatForm();
       });
     }
   };
@@ -98,7 +98,7 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
           ))}
           <DropdownItem divider />
           <DropdownItem onClick={toggleCatForm}>Create New</DropdownItem>
-          {showInput ? (
+          {showCatForm ? (
             <CatForm>
               <input
                 className="form-control form-control-lg me-1 input"
@@ -106,7 +106,7 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
                 name="category"
                 id="category"
                 value={catFormInput.category}
-                onChange={handleChange}
+                onChange={handleCatChange}
                 placeholder="New Category"
                 required
               />
