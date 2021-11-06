@@ -21,10 +21,24 @@ const Background = styled.div`
     text-shadow: 2px 2px #a9a29e;
   }
 
+  h4 {
+    color: #444430;
+    font-family: 'Heebo', sans-serif;
+    font-size: 35px;
+    font-weight: 400;
+  }
+
   h5 {
     color: #a56a26;
     font-family: 'Nothing You Could Do', cursive;
     font-size: 35px;
+    font-weight: bold;
+  }
+
+  h6 {
+    color: #a56a26;
+    font-family: 'Nothing You Could Do', cursive;
+    font-size: 20px;
     font-weight: bold;
   }
 `;

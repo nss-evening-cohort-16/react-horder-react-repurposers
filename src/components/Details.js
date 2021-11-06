@@ -13,12 +13,8 @@ const Photo = styled.img`
   border-radius: 2px;
 `;
 
-const Title = styled.div`
+const Title = styled.h4`
   text-align: center;
-
-  font-family: 'Heebo', sans-serif;
-  font-size: 150%;
-  font-weight: bold;
 
   border-bottom: 1px solid black;
   margin: 20px;
@@ -28,6 +24,7 @@ const Description = styled.div`
   max-width: 700px;
   text-align: center;
 
+  color: #444430;
   font-family: 'Heebo', sans-serif;
   margin-bottom: 15px;
 `;
@@ -42,7 +39,11 @@ export default function Details({ stuff }) {
   return (
     <>
       <Photo src={stuff.itemImage} alt={stuff.itemName} />
-      <Title>{stuff.itemName}</Title>
+      <Title>
+        {stuff.itemName}
+        <br />
+        <h6>{stuff.category}</h6>
+      </Title>
       <Description>{stuff.itemDescription}</Description>
       <ButtonContainer>
         <EditButton firebaseKey={stuff.firebaseKey} />
@@ -57,6 +58,7 @@ Details.propTypes = {
     itemName: PropTypes.string,
     itemImage: PropTypes.string,
     itemDescription: PropTypes.string,
+    category: PropTypes.string,
     firebaseKey: PropTypes.string,
   }),
 };
