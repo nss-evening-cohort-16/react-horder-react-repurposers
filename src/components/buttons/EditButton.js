@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function EditButton({ firebaseKey }) {
   return (
-    <Link to={`/edit/${firebaseKey}`} className="btn btn-outline-secondary">
+    <Link to={`/edit/${firebaseKey}`} className="btn-outline-dark btn">
       <i className="fas fa-edit" />
     </Link>
   );

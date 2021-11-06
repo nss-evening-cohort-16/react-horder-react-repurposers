@@ -8,7 +8,7 @@ export default function DeleteButton({ firebaseKey, setAllItems }) {
   return (
     <button
       type="button"
-      className="btn btn-outline-secondary"
+      className="btn-outline-dark btn"
       onClick={() => {
         deleteStuff(firebaseKey).then((allItems) => {
           setAllItems(allItems);

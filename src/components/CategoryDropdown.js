@@ -5,23 +5,15 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { createCategory, getAllCategories } from '../api/data/categoryData';
-
-export const ButtonStyling = styled.button`
-  font-family: 'Heebo', sans-serif;
-  background-color: #e0ccaa;
-  outline-color: #a56a26;
-  margin: 10px;
-`;
 
 const initialState = {
   category: '',
   firebaseKey: '',
 };
 
-export function CategoryDropdown({ formInput, setFormInput }) {
+export default function CategoryDropdown({ formInput, setFormInput }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [catFormInput, setCatFormInput] = useState(initialState);
@@ -39,13 +31,8 @@ export function CategoryDropdown({ formInput, setFormInput }) {
     };
   }, []);
 
-  const handleClick = (e) => {
-    const { innerText } = e.target;
+  const showDropdownForm = () => {
     setShowInput(true);
-    setFormInput((prevState) => ({
-      ...prevState,
-      category: innerText,
-    }));
   };
 
   const selectCategory = (e) => {
@@ -65,23 +52,25 @@ export function CategoryDropdown({ formInput, setFormInput }) {
     }));
   };
 
-  const resetForm = () => {
+  const resetDropdownForm = () => {
     setCatFormInput(initialState);
   };
 
   const handleCatSubmit = (e) => {
     e.preventDefault();
-    createCategory(catFormInput).then((array) => {
-      setCatArray(array);
-      resetForm();
-      setShowInput(false);
-    });
+    if (catFormInput.category.length > 0) {
+      createCategory(catFormInput).then((array) => {
+        setCatArray(array);
+        resetDropdownForm();
+        setShowInput(false);
+      });
+    }
   };
 
   return (
     <>
       <ButtonDropdown isOpen={dropdownOpen} toggle={() => {}}>
-        <DropdownToggle onClick={toggle} caret size="lg">
+        <DropdownToggle color="dark" onClick={toggle} caret size="lg">
           {formInput.category ? formInput.category : 'Select a Category'}
         </DropdownToggle>
         <DropdownMenu>
@@ -95,7 +84,7 @@ export function CategoryDropdown({ formInput, setFormInput }) {
             </DropdownItem>
           ))}
           <DropdownItem divider />
-          <DropdownItem onClick={handleClick}>Create New</DropdownItem>
+          <DropdownItem onClick={showDropdownForm}>Create New</DropdownItem>
           {showInput ? (
             <>
               <input
@@ -108,14 +97,13 @@ export function CategoryDropdown({ formInput, setFormInput }) {
                 placeholder="New Category"
                 required
               />
-              <ButtonStyling
+              <button
+                type="button"
                 onClick={handleCatSubmit}
-                className="btn btn-outline-secondary"
-                type="submit"
+                className="btn-outline-dark btn-styling"
               >
-                {' '}
                 SUBMIT
-              </ButtonStyling>
+              </button>
             </>
           ) : (
             ''

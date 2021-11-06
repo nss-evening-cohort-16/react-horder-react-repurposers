@@ -4,7 +4,7 @@ import { getAllStuff } from '../api/data/stuffData';
 import PaperContainer from '../components/PaperContainer';
 import Polaroid from '../components/Polaroid';
 import SearchStuff from '../components/SearchStuff';
-import { ShowCategoryDropdown } from '../components/ShowCategory';
+import ShowCategoryDropdown from '../components/ShowCategory';
 
 const MyStuffView = styled.div`
   display: flex;

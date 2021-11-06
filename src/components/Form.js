@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { createStuff, updateStuff } from '../api/data/stuffData';
-import { CategoryDropdown } from './CategoryDropdown';
+import CategoryDropdown from './CategoryDropdown';
 
 const EntryForm = styled.form`
   display: flex;
@@ -125,7 +125,7 @@ export default function Form({ stuffObj }) {
       ) : (
         <></>
       )}
-      <button className="btn btn-outline-secondary" type="submit">
+      <button className="btn-outline-dark btn-styling" type="submit">
         {stuffObj.firebaseKey ? 'UPDATE' : 'SUBMIT'}
       </button>
     </EntryForm>

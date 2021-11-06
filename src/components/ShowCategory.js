@@ -5,18 +5,10 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { getAllCategories } from '../api/data/categoryData';
 
-export const ButtonStyling = styled.button`
-  font-family: 'Heebo', sans-serif;
-  background-color: #e0ccaa;
-  outline-color: #a56a26;
-  margin: 10px;
-`;
-
-export function ShowCategoryDropdown({ setFilteredItems, allItems }) {
+export default function ShowCategoryDropdown({ setFilteredItems, allItems }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [catArray, setCatArray] = useState([]);
   const [filter, setFilter] = useState('');
@@ -43,7 +35,7 @@ export function ShowCategoryDropdown({ setFilteredItems, allItems }) {
   return (
     <>
       <ButtonDropdown isOpen={dropdownOpen} toggle={() => {}}>
-        <DropdownToggle onClick={toggle} caret size="lg">
+        <DropdownToggle color="dark" onClick={toggle} caret size="lg">
           {filter || 'Select a Category'}
         </DropdownToggle>
         <DropdownMenu>
