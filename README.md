@@ -3,4 +3,4 @@
 
 ## ERD: ![ERD](/documentation/ERD.png)
 ## Flowchart: ![Flowchart](/documentation/Flowchart.png)
-## Netlify Link: https://react-repurposers-hoarding.netlify.app
+## Netlify Link: https://stuff-hoarder.netlify.app
