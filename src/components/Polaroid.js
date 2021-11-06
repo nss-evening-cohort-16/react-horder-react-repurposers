@@ -28,8 +28,8 @@ const PolaroidSide = styled.div`
   transition: transform 0.4s, box-shadow 0.4s;
 
   &:hover {
-    transform: translate(-5px, -5px);
-    box-shadow: 15px 15px 15px 1px;
+    transform: scale(1.05);
+    box-shadow: 20px 20px 20px 0px;
   }
 `;
 
