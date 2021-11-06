@@ -4,7 +4,7 @@ import { getAllStuff } from '../api/data/stuffData';
 import PaperContainer from '../components/PaperContainer';
 import Polaroid from '../components/Polaroid';
 import SearchStuff from '../components/SearchStuff';
-import { ShowCategoryDropdown } from '../components/ShowCategory';
+import ShowCategoryDropdown from '../components/ShowCategory';
 
 const MyStuffView = styled.div`
   display: flex;
@@ -15,45 +15,61 @@ const MyStuffView = styled.div`
 const Page = PaperContainer();
 
 export default function MyStuff() {
-  const [items, setItems] = useState([]);
   const [allItems, setAllItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [searchedItems, setSearchedItems] = useState([]);
+  const [shownItems, setShownItems] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
     getAllStuff().then((stuffs) => {
-      if (isMounted) {
-        setItems(stuffs);
-        setAllItems(stuffs);
-      }
+      if (isMounted) setAllItems(stuffs);
     });
     return () => {
       isMounted = false;
     };
   }, []);
 
-  // const handleClick = (method) => {
-  //   setItems(allItems.filter((item) => item.category === method));
-  // };
+  useEffect(() => {
+    setFilteredItems(allItems);
+    setSearchedItems(allItems);
+    // Reset filter
+    // Clear search bar
+  }, [allItems]);
+
+  useEffect(() => {
+    const parsedItems = filteredItems.filter((filteredItem) => searchedItems.some(
+      (searchedItem) => filteredItem.firebaseKey === searchedItem.firebaseKey,
+    ));
+    setShownItems(parsedItems);
+  }, [filteredItems, searchedItems]);
 
   return (
     <>
       <Page>
         <h1>MY STUFF</h1>
-        <SearchStuff allItems={allItems} setItems={setItems} />
+        <h5>Search</h5>
+        <SearchStuff setSearchedItems={setSearchedItems} allItems={allItems} />
         <hr />
-        <h5>CATEGORIES</h5>
+        <h5>Filter</h5>
         <ShowCategoryDropdown
-          items={items}
-          setItems={setItems}
+          setFilteredItems={setFilteredItems}
           allItems={allItems}
-          setAllItems={setAllItems}
         />
       </Page>
       <hr />
       <MyStuffView>
-        {items.map((item) => (
-          <Polaroid key={item.firebaseKey || 'notFound'} item={item} />
-        ))}
+        {shownItems.length > 0 ? (
+          shownItems.map((item) => (
+            <Polaroid
+              key={item.firebaseKey}
+              item={item}
+              setAllItems={setAllItems}
+            />
+          ))
+        ) : (
+          <Polaroid />
+        )}
       </MyStuffView>
     </>
   );

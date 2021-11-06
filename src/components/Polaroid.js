@@ -28,8 +28,8 @@ const PolaroidSide = styled.div`
   transition: transform 0.4s, box-shadow 0.4s;
 
   &:hover {
-    transform: translate(-5px, -5px);
-    box-shadow: 15px 15px 15px 1px;
+    transform: scale(1.05);
+    box-shadow: 20px 20px 20px 0px;
   }
 `;
 
@@ -77,7 +77,14 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
-export default function Polaroid({ item }) {
+const notFoundObj = {
+  itemName: 'No Items Found',
+  itemImage: 'https://static.thenounproject.com/png/4147389-200.png',
+  itemDescription:
+    'Could not find any stuff with current search term and filter. Sorry.',
+};
+
+export default function Polaroid({ item, setAllItems }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -87,17 +94,25 @@ export default function Polaroid({ item }) {
     <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
       <PolaroidSide id="front" onClick={handleClick}>
         <PhotoShadow>
-          <Photo src={item.itemImage} alt="ItemImage" />
+          <Photo
+            src={item.itemImage || notFoundObj.itemImage}
+            alt="ItemImage"
+          />
         </PhotoShadow>
-        <Caption>{item.itemName}</Caption>
+        <Caption>{item.itemName || notFoundObj.itemName}</Caption>
       </PolaroidSide>
       <PolaroidSide id="back" onClick={handleClick}>
-        <Description>{item.itemDescription}</Description>
+        <Description>
+          {item.itemDescription || notFoundObj.itemDescription}
+        </Description>
         {item.firebaseKey ? (
           <ButtonContainer>
             <DetailsButton firebaseKey={item.firebaseKey} />
             <EditButton firebaseKey={item.firebaseKey} />
-            <DeleteButton firebaseKey={item.firebaseKey} />
+            <DeleteButton
+              firebaseKey={item.firebaseKey}
+              setAllItems={setAllItems}
+            />
           </ButtonContainer>
         ) : (
           <></>
@@ -109,9 +124,15 @@ export default function Polaroid({ item }) {
 
 Polaroid.propTypes = {
   item: PropTypes.shape({
-    itemName: PropTypes.string.isRequired,
-    itemImage: PropTypes.string.isRequired,
-    itemDescription: PropTypes.string.isRequired,
+    itemName: PropTypes.string,
+    itemImage: PropTypes.string,
+    itemDescription: PropTypes.string,
     firebaseKey: PropTypes.string,
-  }).isRequired,
+  }),
+  setAllItems: PropTypes.func,
+};
+
+Polaroid.defaultProps = {
+  item: {},
+  setAllItems: () => {},
 };

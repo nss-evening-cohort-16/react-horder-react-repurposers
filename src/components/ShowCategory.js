@@ -5,61 +5,38 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { getAllCategories } from '../api/data/categoryData';
-import { getAllStuff } from '../api/data/stuffData';
 
-export const ButtonStyling = styled.button`
-  font-family: 'Heebo', sans-serif;
-  background-color: #e0ccaa;
-  outline-color: #a56a26;
-  margin: 10px;
-`;
-
-export function ShowCategoryDropdown({
-  items,
-  setItems,
-  allItems,
-  setAllItems,
-}) {
+export default function ShowCategoryDropdown({ setFilteredItems, allItems }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [catArray, setCatArray] = useState([]);
   const [filter, setFilter] = useState('');
 
-  const toggle = () => setDropdownOpen(!dropdownOpen);
-
   useEffect(() => {
     let isMounted = true;
-    getAllStuff().then((stuffs) => {
-      if (isMounted) {
-        setItems(stuffs);
-        setAllItems(stuffs);
-        getAllCategories().then(setCatArray);
-      }
+    getAllCategories().then((cats) => {
+      if (isMounted) setCatArray(cats);
     });
     return () => {
       isMounted = false;
     };
   }, []);
 
+  const toggle = () => setDropdownOpen(!dropdownOpen);
+
   const selectCategory = (e) => {
     const { innerText } = e.target;
-    console.warn(filter);
     setFilter(innerText);
-    setItems(allItems.filter((item) => item.category === innerText));
+    setFilteredItems(allItems.filter((item) => item.category === innerText));
     setDropdownOpen(false);
   };
-
-  //   const resetCategory = () => {
-  //     setCatFormInput(initialState);
-  //   };
 
   return (
     <>
       <ButtonDropdown isOpen={dropdownOpen} toggle={() => {}}>
-        <DropdownToggle onClick={toggle} caret size="sm">
-          {items.category ? items.category : 'Select a Category'}
+        <DropdownToggle color="outline-dark" onClick={toggle} caret size="lg">
+          {filter || 'Select a Category'}
         </DropdownToggle>
         <DropdownMenu>
           {catArray.map((category) => (
@@ -74,8 +51,6 @@ export function ShowCategoryDropdown({
 }
 
 ShowCategoryDropdown.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setItems: PropTypes.func.isRequired,
+  setFilteredItems: PropTypes.func.isRequired,
   allItems: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setAllItems: PropTypes.func.isRequired,
 };

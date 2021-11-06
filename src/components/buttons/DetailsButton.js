@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function DetailsButton({ firebaseKey }) {
   return (
-    <Link to={`/stuff/${firebaseKey}`} className="btn btn-outline-secondary">
+    <Link to={`/stuff/${firebaseKey}`} className="btn-outline-dark btn">
       <i className="fas fa-paperclip" />
     </Link>
   );

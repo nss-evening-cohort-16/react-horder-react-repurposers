@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { createStuff, updateStuff } from '../api/data/stuffData';
-import { CategoryDropdown } from './CategoryDropdown';
+import CategoryDropdown from './CategoryDropdown';
 
 const EntryForm = styled.form`
   display: flex;
@@ -14,7 +14,6 @@ const EntryForm = styled.form`
 
 const ErrorMessage = styled.div`
   color: red;
-  // font-weight: bold;
   font-family: 'Heebo', sans-serif;
   font-size: 18px;
 `;
@@ -73,7 +72,7 @@ export default function Form({ stuffObj }) {
 
   const categoryRequired = (e) => {
     e.preventDefault();
-    if (stuffObj.category) {
+    if (formInput.category) {
       handleSubmit(e);
     } else {
       setShowError(true);
@@ -126,7 +125,7 @@ export default function Form({ stuffObj }) {
       ) : (
         <></>
       )}
-      <button className="btn btn-outline-secondary" type="submit">
+      <button className="btn-outline-dark btn-styling" type="submit">
         {stuffObj.firebaseKey ? 'UPDATE' : 'SUBMIT'}
       </button>
     </EntryForm>
