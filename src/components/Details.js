@@ -39,11 +39,8 @@ export default function Details({ stuff }) {
   return (
     <>
       <Photo src={stuff.itemImage} alt={stuff.itemName} />
-      <Title>
-        {stuff.itemName}
-        <br />
-        <h6>{stuff.category}</h6>
-      </Title>
+      <Title>{stuff.itemName}</Title>
+      <h6>{stuff.category}</h6>
       <Description>{stuff.itemDescription}</Description>
       <ButtonContainer>
         <EditButton firebaseKey={stuff.firebaseKey} />
