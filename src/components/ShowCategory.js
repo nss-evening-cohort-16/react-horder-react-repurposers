@@ -35,7 +35,7 @@ export default function ShowCategoryDropdown({ setFilteredItems, allItems }) {
   return (
     <>
       <ButtonDropdown isOpen={dropdownOpen} toggle={() => {}}>
-        <DropdownToggle color="dark" onClick={toggle} caret size="lg">
+        <DropdownToggle color="outline-dark" onClick={toggle} caret size="lg">
           {filter || 'Select a Category'}
         </DropdownToggle>
         <DropdownMenu>

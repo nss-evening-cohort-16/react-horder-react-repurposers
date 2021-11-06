@@ -70,7 +70,7 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
   return (
     <>
       <ButtonDropdown isOpen={dropdownOpen} toggle={() => {}}>
-        <DropdownToggle color="dark" onClick={toggle} caret size="lg">
+        <DropdownToggle color="outline-dark" onClick={toggle} caret size="lg">
           {formInput.category ? formInput.category : 'Select a Category'}
         </DropdownToggle>
         <DropdownMenu>
