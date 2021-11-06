@@ -6,7 +6,16 @@ import {
   DropdownItem,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { createCategory, getAllCategories } from '../api/data/categoryData';
+
+const CatForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 10px;
+`;
 
 const initialState = {
   category: '',
@@ -19,8 +28,6 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
   const [catFormInput, setCatFormInput] = useState(initialState);
   const [catArray, setCatArray] = useState([]);
 
-  const toggle = () => setDropdownOpen(!dropdownOpen);
-
   useEffect(() => {
     let isMounted = true;
     getAllCategories().then((cats) => {
@@ -31,8 +38,15 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
     };
   }, []);
 
-  const showDropdownForm = () => {
-    setShowInput(true);
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
+  const toggleDropdownForm = () => {
+    setShowInput(!showInput);
+  };
+
+  const resetDropdownForm = () => {
+    setCatFormInput(initialState);
+    setShowInput(false);
   };
 
   const selectCategory = (e) => {
@@ -42,6 +56,7 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
       category: innerText,
     }));
     setDropdownOpen(false);
+    resetDropdownForm();
   };
 
   const handleChange = (e) => {
@@ -52,17 +67,12 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
     }));
   };
 
-  const resetDropdownForm = () => {
-    setCatFormInput(initialState);
-  };
-
   const handleCatSubmit = (e) => {
     e.preventDefault();
     if (catFormInput.category.length > 0) {
       createCategory(catFormInput).then((array) => {
         setCatArray(array);
         resetDropdownForm();
-        setShowInput(false);
       });
     }
   };
@@ -70,7 +80,12 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
   return (
     <>
       <ButtonDropdown isOpen={dropdownOpen} toggle={() => {}}>
-        <DropdownToggle color="outline-dark" onClick={toggle} caret size="lg">
+        <DropdownToggle
+          color="outline-dark"
+          onClick={toggleDropdown}
+          caret
+          size="lg"
+        >
           {formInput.category ? formInput.category : 'Select a Category'}
         </DropdownToggle>
         <DropdownMenu>
@@ -84,11 +99,11 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
             </DropdownItem>
           ))}
           <DropdownItem divider />
-          <DropdownItem onClick={showDropdownForm}>Create New</DropdownItem>
+          <DropdownItem onClick={toggleDropdownForm}>Create New</DropdownItem>
           {showInput ? (
-            <>
+            <CatForm>
               <input
-                className="form-control form-control-lg me-1"
+                className="form-control form-control-lg me-1 input"
                 type="text"
                 name="category"
                 id="category"
@@ -104,7 +119,7 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
               >
                 SUBMIT
               </button>
-            </>
+            </CatForm>
           ) : (
             ''
           )}
