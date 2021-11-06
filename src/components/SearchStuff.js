@@ -1,14 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function SearchStuff({ setSearchedItems, allItems }) {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  useEffect(() => {
-    const results = allItems.filter((item) => item.itemName.toLowerCase().includes(searchTerm.toLowerCase()));
-    setSearchedItems(results);
-  }, [searchTerm]);
-
+export default function SearchStuff({ setSearchTerm, searchTerm }) {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -23,6 +16,6 @@ export default function SearchStuff({ setSearchedItems, allItems }) {
   );
 }
 SearchStuff.propTypes = {
-  setSearchedItems: PropTypes.func.isRequired,
-  allItems: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  setSearchTerm: PropTypes.func.isRequired,
+  searchTerm: PropTypes.string.isRequired,
 };
