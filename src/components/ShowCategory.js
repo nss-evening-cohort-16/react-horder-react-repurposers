@@ -34,6 +34,11 @@ export default function ShowCategoryDropdown({
     setDropdownOpen(false);
   };
 
+  const clearFilter = () => {
+    resetFilter();
+    setDropdownOpen(false);
+  };
+
   return (
     <>
       <ButtonDropdown isOpen={dropdownOpen} toggle={() => {}}>
@@ -47,7 +52,7 @@ export default function ShowCategoryDropdown({
             </DropdownItem>
           ))}
           <DropdownItem divider />
-          <DropdownItem onClick={resetFilter}>Clear Filter</DropdownItem>
+          <DropdownItem onClick={clearFilter}>Clear Filter</DropdownItem>
         </DropdownMenu>
       </ButtonDropdown>
     </>
