@@ -40,9 +40,7 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
-  const toggleDropdownForm = () => {
-    setShowInput(!showInput);
-  };
+  const toggleCatForm = () => setShowInput(!showInput);
 
   const resetDropdownForm = () => {
     setCatFormInput(initialState);
@@ -99,7 +97,7 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
             </DropdownItem>
           ))}
           <DropdownItem divider />
-          <DropdownItem onClick={toggleDropdownForm}>Create New</DropdownItem>
+          <DropdownItem onClick={toggleCatForm}>Create New</DropdownItem>
           {showInput ? (
             <CatForm>
               <input
