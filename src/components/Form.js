@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { createStuff, updateStuff } from '../api/data/stuffData';
 import CategoryDropdown from './CategoryDropdown';
+import userId from '../api/data/userId';
 
 const EntryForm = styled.form`
   display: flex;
@@ -27,7 +28,11 @@ const initialState = {
 };
 
 export default function Form({ stuffObj }) {
-  const [formInput, setFormInput] = useState(initialState);
+  const userInfo = userId();
+  const [formInput, setFormInput] = useState({
+    ...initialState,
+    user: userInfo,
+  });
   const history = useHistory();
   const [showError, setShowError] = useState(false);
 
@@ -39,6 +44,7 @@ export default function Form({ stuffObj }) {
         firebaseKey: stuffObj.firebaseKey,
         itemDescription: stuffObj.itemDescription,
         category: stuffObj.category,
+        user: userInfo.user,
       });
     }
   }, [stuffObj]);

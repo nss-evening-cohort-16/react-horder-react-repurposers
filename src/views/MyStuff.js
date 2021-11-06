@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getAllStuff } from '../api/data/stuffData';
+import userId from '../api/data/userId';
 import PaperContainer from '../components/PaperContainer';
 import Polaroid from '../components/Polaroid';
 import SearchStuff from '../components/SearchStuff';
@@ -20,7 +21,7 @@ export default function MyStuff() {
 
   useEffect(() => {
     let isMounted = true;
-    getAllStuff().then((stuffs) => {
+    getAllStuff(userId()).then((stuffs) => {
       if (isMounted) setAllItems(stuffs);
     });
     return () => {
