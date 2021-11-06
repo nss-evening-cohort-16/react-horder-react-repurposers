@@ -15,10 +15,8 @@ const MyStuffView = styled.div`
 const Page = PaperContainer();
 
 export default function MyStuff() {
+  // Cache inventory
   const [allItems, setAllItems] = useState([]);
-  const [filteredItems, setFilteredItems] = useState([]);
-  const [searchedItems, setSearchedItems] = useState([]);
-  const [shownItems, setShownItems] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -30,12 +28,38 @@ export default function MyStuff() {
     };
   }, []);
 
+  // Handle Filtering
+  const [filter, setFilter] = useState('');
+  const [filteredItems, setFilteredItems] = useState([]);
+
   useEffect(() => {
+    if (filter) {
+      const filterResults = allItems.filter((item) => item.category === filter);
+      setFilteredItems(filterResults);
+    }
+  }, [filter]);
+
+  const resetFilter = () => {
+    setFilter('');
     setFilteredItems(allItems);
+  };
+
+  // Handle Searching
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchedItems, setSearchedItems] = useState([]);
+
+  useEffect(() => {
+    const searchResults = allItems.filter((item) => item.itemName.toLowerCase().includes(searchTerm.toLowerCase()));
+    setSearchedItems(searchResults);
+  }, [searchTerm]);
+
+  const resetSearchTerm = () => {
+    setSearchTerm('');
     setSearchedItems(allItems);
-    // Reset filter
-    // Clear search bar
-  }, [allItems]);
+  };
+
+  // Display inventory
+  const [shownItems, setShownItems] = useState([]);
 
   useEffect(() => {
     const parsedItems = filteredItems.filter((filteredItem) => searchedItems.some(
@@ -44,17 +68,23 @@ export default function MyStuff() {
     setShownItems(parsedItems);
   }, [filteredItems, searchedItems]);
 
+  useEffect(() => {
+    resetFilter();
+    resetSearchTerm();
+  }, [allItems]);
+
   return (
     <>
       <Page>
         <h1>MY STUFF</h1>
         <h5>Search</h5>
-        <SearchStuff setSearchedItems={setSearchedItems} allItems={allItems} />
+        <SearchStuff setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
         <hr />
         <h5>Filter</h5>
         <ShowCategoryDropdown
-          setFilteredItems={setFilteredItems}
-          allItems={allItems}
+          setFilter={setFilter}
+          filter={filter}
+          resetFilter={resetFilter}
         />
       </Page>
       <hr />

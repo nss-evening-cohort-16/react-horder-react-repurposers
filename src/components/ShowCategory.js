@@ -8,10 +8,13 @@ import {
 import PropTypes from 'prop-types';
 import { getAllCategories } from '../api/data/categoryData';
 
-export default function ShowCategoryDropdown({ setFilteredItems, allItems }) {
+export default function ShowCategoryDropdown({
+  setFilter,
+  filter,
+  resetFilter,
+}) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [catArray, setCatArray] = useState([]);
-  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     let isMounted = true;
@@ -28,7 +31,6 @@ export default function ShowCategoryDropdown({ setFilteredItems, allItems }) {
   const selectCategory = (e) => {
     const { innerText } = e.target;
     setFilter(innerText);
-    setFilteredItems(allItems.filter((item) => item.category === innerText));
     setDropdownOpen(false);
   };
 
@@ -44,6 +46,8 @@ export default function ShowCategoryDropdown({ setFilteredItems, allItems }) {
               {category.category}
             </DropdownItem>
           ))}
+          <DropdownItem divider />
+          <DropdownItem onClick={resetFilter}>Clear Filter</DropdownItem>
         </DropdownMenu>
       </ButtonDropdown>
     </>
@@ -51,6 +55,7 @@ export default function ShowCategoryDropdown({ setFilteredItems, allItems }) {
 }
 
 ShowCategoryDropdown.propTypes = {
-  setFilteredItems: PropTypes.func.isRequired,
-  allItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setFilter: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
+  resetFilter: PropTypes.func.isRequired,
 };
