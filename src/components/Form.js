@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { createStuff, updateStuff } from '../api/data/stuffData';
 import CategoryDropdown from './CategoryDropdown';
-import userObj from '../api/data/userObj';
+import userId from '../api/data/userId';
 
 const EntryForm = styled.form`
   display: flex;
@@ -28,7 +28,7 @@ const initialState = {
 };
 
 export default function Form({ stuffObj }) {
-  const userInfo = userObj();
+  const userInfo = userId();
   const [formInput, setFormInput] = useState({
     ...initialState,
     user: userInfo,

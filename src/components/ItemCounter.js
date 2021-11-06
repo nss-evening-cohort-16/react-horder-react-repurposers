@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getAllStuff } from '../api/data/stuffData';
-import userObj from '../api/data/userObj';
+import userId from '../api/data/userId';
 
 const Counter = styled.div`
   color: #444430;
@@ -15,7 +15,7 @@ export default function ItemCounter() {
 
   useEffect(() => {
     let isMounted = true;
-    getAllStuff(userObj()).then((item) => {
+    getAllStuff(userId()).then((item) => {
       if (isMounted) setItemCount(item);
     });
     return () => {
