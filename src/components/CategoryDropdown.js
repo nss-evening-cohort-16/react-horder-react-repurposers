@@ -7,6 +7,7 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { createCategory, getAllCategories } from '../api/data/categoryData';
+import userId from '../api/data/userId';
 
 const initialState = {
   category: '',
@@ -16,14 +17,18 @@ const initialState = {
 export default function CategoryDropdown({ formInput, setFormInput }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showInput, setShowInput] = useState(false);
-  const [catFormInput, setCatFormInput] = useState(initialState);
+  const userInfo = userId();
+  const [catFormInput, setCatFormInput] = useState({
+    ...initialState,
+    user: userInfo,
+  });
   const [catArray, setCatArray] = useState([]);
 
   const toggle = () => setDropdownOpen(!dropdownOpen);
 
   useEffect(() => {
     let isMounted = true;
-    getAllCategories().then((cats) => {
+    getAllCategories(userInfo).then((cats) => {
       if (isMounted) setCatArray(cats);
     });
     return () => {
