@@ -31,7 +31,7 @@ export default function Form({ stuffObj }) {
   const userInfo = userId();
   const [formInput, setFormInput] = useState({
     ...initialState,
-    user: userInfo,
+    uid: userInfo,
   });
   const history = useHistory();
   const [showError, setShowError] = useState(false);
@@ -44,7 +44,7 @@ export default function Form({ stuffObj }) {
         firebaseKey: stuffObj.firebaseKey,
         itemDescription: stuffObj.itemDescription,
         category: stuffObj.category,
-        user: userInfo.user,
+        uid: userInfo.user,
       });
     }
   }, [stuffObj]);
