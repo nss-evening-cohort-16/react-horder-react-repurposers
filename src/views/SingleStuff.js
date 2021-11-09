@@ -1,42 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams, useHistory } from 'react-router-dom';
-import { deleteStuff, getSingleStuff } from '../api/data/stuffData';
+import { useParams } from 'react-router-dom';
+import { getSingleStuff } from '../api/data/stuffData';
+import Details from '../components/Details';
+import PaperContainer from '../components/PaperContainer';
+
+const Page = PaperContainer();
 
 export default function SingleStuff() {
-  const [singleStuff, setSingleStuff] = useState({});
   const { key } = useParams();
-  const history = useHistory();
-
+  const [singleStuff, setSingleStuff] = useState({});
   useEffect(() => {
     getSingleStuff(key).then(setSingleStuff);
   }, []);
 
   return (
-    <>
-      <h3>
-        Name:
-        <br />
-        {singleStuff.itemName}
-      </h3>
-      <br />
-      <img src={singleStuff.itemImage} alt="ItemImage" />
-      <br />
-      <div>
-        <h3>Description:</h3>
-        <br />
-        {singleStuff.itemDescription}
-      </div>
-      <br />
-      <Link to={`/edit/${singleStuff.firebaseKey}`}>Edit</Link>
-      <br />
-      <button
-        type="button"
-        onClick={() => {
-          deleteStuff(singleStuff.firebaseKey).then(() => history.push('/stuff'));
-        }}
-      >
-        Delete
-      </button>
-    </>
+    <Page>
+      <Details stuff={singleStuff} />
+    </Page>
   );
 }

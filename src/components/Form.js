@@ -1,18 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 import { createStuff, updateStuff } from '../api/data/stuffData';
+import CategoryDropdown from './CategoryDropdown';
+import userId from '../api/data/userId';
+
+const EntryForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+`;
+
+const ErrorMessage = styled.div`
+  color: red;
+  font-family: 'Heebo', sans-serif;
+  font-size: 18px;
+`;
 
 const initialState = {
   itemName: '',
   itemImage: '',
   firebaseKey: '',
   itemDescription: '',
+  category: '',
 };
 
 export default function Form({ stuffObj }) {
-  const [formInput, setFormInput] = useState(initialState);
+  const userInfo = userId();
+  const [formInput, setFormInput] = useState({
+    ...initialState,
+    uid: userInfo,
+  });
   const history = useHistory();
+  const [showError, setShowError] = useState(false);
 
   useEffect(() => {
     if (stuffObj.firebaseKey) {
@@ -21,6 +43,8 @@ export default function Form({ stuffObj }) {
         itemImage: stuffObj.itemImage,
         firebaseKey: stuffObj.firebaseKey,
         itemDescription: stuffObj.itemDescription,
+        category: stuffObj.category,
+        uid: userInfo.user,
       });
     }
   }, [stuffObj]);
@@ -52,46 +76,65 @@ export default function Form({ stuffObj }) {
     }
   };
 
+  const categoryRequired = (e) => {
+    e.preventDefault();
+    if (formInput.category) {
+      handleSubmit(e);
+    } else {
+      setShowError(true);
+    }
+  };
+
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3 d-flex">
-          <input
-            className="form-control form-control-lg me-1"
-            type="text"
-            name="itemName"
-            id="itemName"
-            value={formInput.itemName}
-            onChange={handleChange}
-            placeholder="Add Item Name"
-            required
-          />
-          <input
-            className="form-control form-control-lg me-1"
-            type="url"
-            name="itemImage"
-            id="itemImage"
-            value={formInput.itemImage}
-            onChange={handleChange}
-            placeholder="ADD ITEM IMAGE URL"
-            required
-          />
-          <input
-            className="form-control form-control-lg me-1"
-            type="text"
-            name="itemDescription"
-            id="itemDescription"
-            value={formInput.itemDescription}
-            onChange={handleChange}
-            placeholder="ADD ITEM DESCRIPTION"
-            required
-          />
-          <button className="btn btn-success" type="submit">
-            {stuffObj.firebaseKey ? 'UPDATE' : 'SUBMIT'}
-          </button>
-        </div>
-      </form>
-    </div>
+    <EntryForm onSubmit={categoryRequired}>
+      <h1>{stuffObj.firebaseKey ? 'EDIT' : 'SAVE'} STUFF</h1>
+      <h5>
+        {stuffObj.firebaseKey
+          ? 'Update item information below!'
+          : 'Add what you want to save below!'}
+      </h5>
+      <input
+        className="form-control form-control-lg me-1 input"
+        type="text"
+        name="itemName"
+        id="itemName"
+        value={formInput.itemName}
+        onChange={handleChange}
+        placeholder="NAME"
+        maxLength="40"
+        required
+      />
+      <input
+        className="form-control form-control-lg me-1 input"
+        type="url"
+        name="itemImage"
+        id="itemImage"
+        value={formInput.itemImage}
+        onChange={handleChange}
+        placeholder="IMAGE URL"
+        required
+      />
+      <textarea
+        className="form-control form-control-lg me-1 input"
+        name="itemDescription"
+        id="itemDescription"
+        value={formInput.itemDescription}
+        onChange={handleChange}
+        placeholder="DESCRIPTION"
+        maxLength="325"
+        rows="7"
+        required
+      />
+      <CategoryDropdown formInput={formInput} setFormInput={setFormInput} />
+      {showError ? (
+        <ErrorMessage className="error">MUST SELECT CATEGORY!</ErrorMessage>
+      ) : (
+        <></>
+      )}
+      <button className="btn-outline-dark btn-styling" type="submit">
+        {stuffObj.firebaseKey ? 'UPDATE' : 'SUBMIT'}
+      </button>
+    </EntryForm>
   );
 }
 
@@ -102,6 +145,7 @@ Form.propTypes = {
     itemImage: PropTypes.string,
     itemDescription: PropTypes.string,
     uid: PropTypes.string,
+    category: PropTypes.string,
   }),
 };
 

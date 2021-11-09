@@ -2,19 +2,39 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { signOutUser } from '../api/auth';
+import img from '../images/navbar-background.png';
+import SignOutButton from './buttons/SignOutButton';
+import SignInButton from './buttons/SignInButton';
 
 const NavBar = styled.div`
   display: flex;
   justify-content: space-between;
-
+  background-image: url(${img});
   padding: 10px;
-  border-bottom: 1px solid black;
+  border-bottom: 2px dashed black;
 `;
 
 const NavContainer = styled.div`
   display: flex;
   column-gap: 10px;
+  margin-left: 20px;
+
+  .linkStyling {
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #444430;
+    font-family: 'Heebo', sans-serif;
+    font-size: 25px;
+    text-decoration: none;
+  }
+
+  a:active {
+    color: #a56a26;
+  }
+
+  a:hover {
+    text-shadow: 2px 2px #a9a29e;
+  }
 `;
 
 export default function Navigation({ user }) {
@@ -23,20 +43,23 @@ export default function Navigation({ user }) {
       {user ? (
         <>
           <NavContainer>
-            <Link to="/home">Home</Link>
-            <Link to="/stuff">My Stuff</Link>
-            <Link to="/new">New</Link>
+            <Link className="linkStyling" to="/home">
+              HOME
+            </Link>
+            <Link className="linkStyling" to="/stuff">
+              MY STUFF
+            </Link>
+            <Link className="linkStyling" to="/new">
+              NEW
+            </Link>
           </NavContainer>
-          <button
-            type="button"
-            className="btn btn-danger"
-            onClick={signOutUser}
-          >
-            Sign Out
-          </button>
+          <SignOutButton />
         </>
       ) : (
-        <div>React Hoarder</div>
+        <>
+          <div />
+          <SignInButton />
+        </>
       )}
     </NavBar>
   );

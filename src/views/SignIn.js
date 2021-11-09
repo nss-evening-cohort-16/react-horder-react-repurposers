@@ -1,29 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Spinner } from 'reactstrap';
-import { signInUser } from '../api/auth';
+import SignInButton from '../components/buttons/SignInButton';
+import PaperContainer from '../components/PaperContainer';
+
+const Page = PaperContainer();
 
 export default function SignIn({ user }) {
   return (
     <>
       {user === null ? (
-        <div className="text-center">
-          <Spinner
-            style={{ width: '10rem', height: '10rem' }}
-            color="warning"
-          />
-        </div>
+        <Spinner style={{ width: '5rem', height: '5rem' }} color="secondary" />
       ) : (
-        <div className="text-center mt-5">
-          <h1>Welcome to React Repurposers!</h1>
-          <button
-            type="button"
-            className="btn btn-success"
-            onClick={signInUser}
-          >
-            Login
-          </button>
-        </div>
+        <Page>
+          <h1>Welcome to Stuff Hoarder!</h1>
+          <h5>Sign in to start collecting</h5>
+          <br />
+          <SignInButton />
+        </Page>
       )}
     </>
   );
