@@ -7,6 +7,7 @@ export default function PaperContainer() {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 
     padding: 70px 50px;
     margin: 10px;
