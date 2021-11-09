@@ -7,18 +7,20 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { getAllCategories } from '../api/data/categoryData';
+import userId from '../api/data/userId';
 
 export default function ShowCategoryDropdown({
   setFilter,
   filter,
   resetFilter,
 }) {
+  const userInfo = userId();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [catArray, setCatArray] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
-    getAllCategories().then((cats) => {
+    getAllCategories(userInfo).then((cats) => {
       if (isMounted) setCatArray(cats);
     });
     return () => {

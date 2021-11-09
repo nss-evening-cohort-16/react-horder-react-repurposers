@@ -8,6 +8,7 @@ import {
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { createCategory, getAllCategories } from '../api/data/categoryData';
+import userId from '../api/data/userId';
 
 const CatForm = styled.div`
   display: flex;
@@ -25,12 +26,16 @@ const initialState = {
 export default function CategoryDropdown({ formInput, setFormInput }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showCatForm, setShowCatForm] = useState(false);
-  const [catFormInput, setCatFormInput] = useState(initialState);
+  const userInfo = userId();
+  const [catFormInput, setCatFormInput] = useState({
+    ...initialState,
+    user: userInfo,
+  });
   const [catArray, setCatArray] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
-    getAllCategories().then((cats) => {
+    getAllCategories(userInfo).then((cats) => {
       if (isMounted) setCatArray(cats);
     });
     return () => {
