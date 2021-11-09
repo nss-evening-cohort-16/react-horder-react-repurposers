@@ -6,8 +6,17 @@ import {
   DropdownItem,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { createCategory, getAllCategories } from '../api/data/categoryData';
 import userId from '../api/data/userId';
+
+const CatForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 10px;
+`;
 
 const initialState = {
   category: '',
@@ -16,15 +25,13 @@ const initialState = {
 
 export default function CategoryDropdown({ formInput, setFormInput }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [showInput, setShowInput] = useState(false);
+  const [showCatForm, setShowCatForm] = useState(false);
   const userInfo = userId();
   const [catFormInput, setCatFormInput] = useState({
     ...initialState,
     user: userInfo,
   });
   const [catArray, setCatArray] = useState([]);
-
-  const toggle = () => setDropdownOpen(!dropdownOpen);
 
   useEffect(() => {
     let isMounted = true;
@@ -36,8 +43,13 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
     };
   }, []);
 
-  const showDropdownForm = () => {
-    setShowInput(true);
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
+  const toggleCatForm = () => setShowCatForm(!showCatForm);
+
+  const resetCatForm = () => {
+    setCatFormInput(initialState);
+    setShowCatForm(false);
   };
 
   const selectCategory = (e) => {
@@ -47,9 +59,10 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
       category: innerText,
     }));
     setDropdownOpen(false);
+    resetCatForm();
   };
 
-  const handleChange = (e) => {
+  const handleCatChange = (e) => {
     const { name, value } = e.target;
     setCatFormInput((prevState) => ({
       ...prevState,
@@ -57,17 +70,12 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
     }));
   };
 
-  const resetDropdownForm = () => {
-    setCatFormInput(initialState);
-  };
-
   const handleCatSubmit = (e) => {
     e.preventDefault();
     if (catFormInput.category.length > 0) {
       createCategory(catFormInput).then((array) => {
         setCatArray(array);
-        resetDropdownForm();
-        setShowInput(false);
+        resetCatForm();
       });
     }
   };
@@ -75,7 +83,12 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
   return (
     <>
       <ButtonDropdown isOpen={dropdownOpen} toggle={() => {}}>
-        <DropdownToggle color="outline-dark" onClick={toggle} caret size="lg">
+        <DropdownToggle
+          color="outline-dark"
+          onClick={toggleDropdown}
+          caret
+          size="lg"
+        >
           {formInput.category ? formInput.category : 'Select a Category'}
         </DropdownToggle>
         <DropdownMenu>
@@ -89,16 +102,16 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
             </DropdownItem>
           ))}
           <DropdownItem divider />
-          <DropdownItem onClick={showDropdownForm}>Create New</DropdownItem>
-          {showInput ? (
-            <>
+          <DropdownItem onClick={toggleCatForm}>Create New</DropdownItem>
+          {showCatForm ? (
+            <CatForm>
               <input
-                className="form-control form-control-lg me-1"
+                className="form-control form-control-lg me-1 input"
                 type="text"
                 name="category"
                 id="category"
                 value={catFormInput.category}
-                onChange={handleChange}
+                onChange={handleCatChange}
                 placeholder="New Category"
                 required
               />
@@ -109,7 +122,7 @@ export default function CategoryDropdown({ formInput, setFormInput }) {
               >
                 SUBMIT
               </button>
-            </>
+            </CatForm>
           ) : (
             ''
           )}
